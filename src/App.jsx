@@ -81,43 +81,86 @@ const Filigree = () => (
 export default function App(){
   const [sec,setSec]=useState("overview");
   const [lang, setLang] = useState("es");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const t = i18n[lang];
   const grid=(cols,gap=12)=>({display:"grid",gridTemplateColumns:`repeat(${cols},1fr)`,gap});
+  const roman = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI"];
 
   return(
   <div style={sty.page}>
-    {/* HEADER */}
-    <div style={{borderBottom:`1px solid ${borderC}`,padding:"48px 20px 40px",textAlign:"center",background:`linear-gradient(180deg,#1a1510 0%,${bg} 100%)`}}>
-      <p style={{color:gold,fontSize:10,fontWeight:700,letterSpacing:"0.35em",textTransform:"uppercase",marginBottom:12}}>{t.header.subtitle}</p>
-      <p style={{color:gold,fontSize:14,letterSpacing:"0.4em",marginBottom:8}}>☩</p>
-      <h1 style={{fontFamily:"Georgia,serif",fontSize:32,fontWeight:700,color:cream,lineHeight:1.2,marginBottom:8}}>{t.header.title}</h1>
-      <p style={sty.ornament}>{t.header.dateRange}</p>
-      <p style={{color:"#8a7d68",fontSize:12,marginTop:4}}>{t.header.sources}</p>
+    {/* MOBILE SIDEBAR OVERLAY */}
+    {sidebarOpen && <div className="sidebar-overlay" onClick={()=>setSidebarOpen(false)} />}
+
+    {/* SIDEBAR */}
+    <nav className={`sidebar ${sidebarOpen ? "sidebar-open" : ""}`} style={{
+      position:"fixed",left:0,top:0,width:220,height:"100vh",
+      background:parchmentDark,borderRight:`1px solid ${borderC}`,
+      zIndex:40,overflowY:"auto",padding:"32px 0",
+      fontFamily:"'Cinzel',serif",
+      transition:"transform 0.3s ease",
+    }}>
+      <div style={{padding:"0 20px 24px",borderBottom:`1px solid ${borderC}`,marginBottom:16,textAlign:"center"}}>
+        <p style={{color:goldLeaf,fontSize:16,letterSpacing:"0.3em",marginBottom:8}}>☩</p>
+        <p style={{color:ink,fontSize:11,fontWeight:700,letterSpacing:"0.15em",textTransform:"uppercase"}}>{lang==="es"?"ÍNDICE":"INDEX"}</p>
+      </div>
+      {t.nav.map((s,i)=>(
+        <button key={s.id} onClick={()=>{setSec(s.id);setSidebarOpen(false);}} style={{
+          display:"block",width:"100%",textAlign:"left",padding:"10px 20px",
+          border:"none",cursor:"pointer",transition:"all 0.2s",
+          borderLeft:sec===s.id?`3px solid ${goldLeaf}`:"3px solid transparent",
+          background:sec===s.id?"rgba(184,150,62,0.1)":"transparent",
+          color:sec===s.id?goldLeaf:sepia,
+          fontFamily:"'Cormorant Garamond',serif",fontSize:13,fontWeight:sec===s.id?700:400,
+        }}>
+          <span style={{fontFamily:"'Cinzel',serif",fontSize:10,marginRight:8,color:sec===s.id?goldLeaf:sepiaLight}}>{roman[i]}</span>
+          {s.label}
+        </button>
+      ))}
+      <div style={{padding:"20px",marginTop:24,borderTop:`1px solid ${borderC}`}}>
+        <button onClick={()=>setLang(lang==="es"?"en":"es")} style={{
+          background:"transparent",border:`1px solid ${borderC}`,borderRadius:2,
+          color:sepia,padding:"6px 14px",fontSize:11,fontFamily:"'Cinzel',serif",
+          cursor:"pointer",letterSpacing:"0.1em",width:"100%",
+        }}>
+          {lang==="es"?"English":"Español"}
+        </button>
+      </div>
+    </nav>
+
+    {/* MOBILE HEADER */}
+    <div className="mobile-header" style={{
+      display:"none",
+      position:"fixed",top:0,left:0,right:0,zIndex:30,
+      background:parchmentDark,borderBottom:`1px solid ${borderC}`,
+      padding:"10px 16px",alignItems:"center",justifyContent:"space-between",
+    }}>
+      <button onClick={()=>setSidebarOpen(!sidebarOpen)} style={{
+        background:"transparent",border:"none",cursor:"pointer",
+        color:ink,fontSize:18,fontFamily:"'Cinzel',serif",padding:"4px 8px",
+      }}>☩</button>
+      <span style={{fontFamily:"'Cinzel',serif",fontSize:12,color:ink,fontWeight:700,letterSpacing:"0.08em"}}>
+        {t.header.title.split(" ").slice(0,4).join(" ")}...
+      </span>
       <button onClick={()=>setLang(lang==="es"?"en":"es")} style={{
-        background:"rgba(201,168,76,0.15)", border:`1px solid ${gold}40`, borderRadius:4,
-        color:goldLight, padding:"4px 12px", fontSize:11, fontFamily:"Georgia,serif",
-        cursor:"pointer", letterSpacing:"0.1em", marginTop:8
+        background:"transparent",border:`1px solid ${borderC}`,borderRadius:2,
+        color:sepia,padding:"3px 8px",fontSize:10,fontFamily:"'Cinzel',serif",cursor:"pointer",
       }}>
-        {lang==="es"?"English":"Español"}
+        {lang==="es"?"EN":"ES"}
       </button>
     </div>
 
-    {/* NAV */}
-    <div style={{position:"sticky",top:0,zIndex:20,background:`${bg}ee`,backdropFilter:"blur(8px)",borderBottom:`1px solid ${borderC}`}}>
-      <div style={{maxWidth:860,margin:"0 auto",padding:"8px 12px",display:"flex",overflowX:"auto",gap:4}}>
-        {t.nav.map(s=>(
-          <button key={s.id} onClick={()=>setSec(s.id)} style={{
-            padding:"6px 14px",borderRadius:4,fontSize:11,fontWeight:600,fontFamily:"Georgia,serif",
-            whiteSpace:"nowrap",cursor:"pointer",transition:"all 0.2s",border:"none",
-            background:sec===s.id?(s.id==="sspx"?"#1a3a25":s.id==="novusordo"?"#2a1a3a":s.id==="ai"?"#1a2a3a":"#3a2010"):"transparent",
-            color:sec===s.id?goldLight:"#7a6e5a",
-          }}>{s.label}</button>
-        ))}
+    {/* CONTENT AREA */}
+    <div className="content-area" style={{marginLeft:220,maxWidth:720,padding:"40px 32px"}}>
+      <div style={{marginBottom:32,paddingBottom:20,borderBottom:`1px solid ${borderC}`}}>
+        <p style={{fontFamily:"'Cinzel',serif",fontSize:11,color:goldLeaf,letterSpacing:"0.2em",marginBottom:8}}>
+          {lang==="es"?"CAPÍTULO":"CHAPTER"} {roman[t.nav.findIndex(n=>n.id===sec)]}
+        </p>
+        <h1 style={{fontFamily:"'Cinzel',serif",fontSize:28,fontWeight:700,color:ink,lineHeight:1.3}}>
+          {t.nav.find(n=>n.id===sec)?.label}
+        </h1>
       </div>
-    </div>
 
-    <div style={{maxWidth:860,margin:"0 auto",padding:"32px 16px"}}>
-      <div style={{display:"flex",flexDirection:"column",gap:20}}>
+      <div style={{display:"flex",flexDirection:"column",gap:24}}>
 
       {/* ══════════ OVERVIEW ══════════ */}
       {sec==="overview"&&<>
@@ -636,12 +679,12 @@ export default function App(){
       </>}
 
       </div>
-    </div>
 
-    {/* FOOTER */}
-    <div style={{borderTop:`1px solid ${borderC}`,padding:"32px 16px",textAlign:"center"}}>
-      <p style={{color:gold,fontSize:12,letterSpacing:"0.3em"}}>☩</p>
-      <p style={{color:"#5a5448",fontSize:10,marginTop:8}}>{t.footer.text}</p>
+      {/* FOOTER */}
+      <div style={{borderTop:`1px solid ${borderC}`,padding:"32px 0 16px",textAlign:"center",marginTop:40}}>
+        <p style={{color:goldLeaf,fontSize:14,letterSpacing:"0.3em"}}>☩</p>
+        <p style={{color:sepia,fontSize:11,marginTop:8,fontFamily:"'Cormorant Garamond',serif"}}>{t.footer.text}</p>
+      </div>
     </div>
   </div>
   );
