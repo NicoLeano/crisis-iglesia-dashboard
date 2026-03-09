@@ -465,7 +465,7 @@ export const i18n = {
       sources: [
         { name: "Vaticano", url: "https://www.catholic-hierarchy.org/country/xsc2.html" },
         { name: "Harvard/NBER", url: "https://www.nber.org/papers/w34060" },
-        { name: "CARA", url: "https://cara.georgetown.edu/" },
+        { name: "CARA", url: "https://cara.georgetown.edu/frequently-requested-church-statistics/" },
         { name: "Gallup", url: "https://news.gallup.com/poll/232226/church-attendance-among-catholics-resumes-downward-slide.aspx" },
         { name: "Pew", url: "https://www.pewresearch.org/religion/" },
         { name: "FSSPX", url: "https://fsspx.news/en/news-events/news/society-st-pius-x-statistics-2025" },
@@ -947,7 +947,7 @@ export const i18n = {
       sources: [
         { name: "Vatican", url: "https://www.catholic-hierarchy.org/country/xsc2.html" },
         { name: "Harvard/NBER", url: "https://www.nber.org/papers/w34060" },
-        { name: "CARA", url: "https://cara.georgetown.edu/" },
+        { name: "CARA", url: "https://cara.georgetown.edu/frequently-requested-church-statistics/" },
         { name: "Gallup", url: "https://news.gallup.com/poll/232226/church-attendance-among-catholics-resumes-downward-slide.aspx" },
         { name: "Pew", url: "https://www.pewresearch.org/religion/" },
         { name: "SSPX", url: "https://fsspx.news/en/news-events/news/society-st-pius-x-statistics-2025" },
