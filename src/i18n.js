@@ -450,6 +450,12 @@ export const i18n = {
       results: "resultados",
       visitWebsite: "Visitar sitio web",
       nearMe: "Cerca de mi",
+      directions: "Como llegar",
+      noResults: "No se encontraron capillas",
+      noResultsSub: "Intenta con otro termino o pais",
+      km: "km",
+      drawerOpen: "Ver lista",
+      drawerClose: "Cerrar lista",
     },
 
     // ==================== FOOTER ====================
@@ -917,6 +923,12 @@ export const i18n = {
       results: "results",
       visitWebsite: "Visit website",
       nearMe: "Near me",
+      directions: "Get directions",
+      noResults: "No chapels found",
+      noResultsSub: "Try a different search or country",
+      km: "km",
+      drawerOpen: "View list",
+      drawerClose: "Close list",
     },
 
     // ==================== FOOTER ====================

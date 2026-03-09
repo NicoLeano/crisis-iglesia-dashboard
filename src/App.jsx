@@ -107,7 +107,7 @@ export default function App(){
   const t = i18n[lang];
   const grid=(cols,gap=2)=>({display:"grid",gridTemplateColumns:`repeat(${cols},1fr)`,gap});
 
-  if (page === "map") return <MassMap t={t} lang={lang} onBack={() => setPage("dashboard")} />;
+  if (page === "map") return <MassMap t={t} lang={lang} setLang={setLang} onBack={() => setPage("dashboard")} />;
 
   return(
   <div style={{minHeight:"100vh",background:bg,color:text}}>
