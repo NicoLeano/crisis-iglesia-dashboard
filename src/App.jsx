@@ -165,28 +165,28 @@ export default function App(){
       {/* ══════════ OVERVIEW ══════════ */}
       {sec==="overview"&&<>
         <Card><H2>{t.overview.h2}</H2><Orn/>
-          <p style={{color:"#c4b89a",fontSize:14,lineHeight:1.7}}>{t.overview.paragraph}</p>
+          <p className="drop-cap" style={{color:ink,fontSize:15,lineHeight:1.8}}>{t.overview.paragraph}</p>
         </Card>
-        <div style={grid(4)}>{t.overview.statsRow1.map(([v,l,s,p],i)=><Stat key={i} value={v} label={l} sub={s} period={p}/>)}</div>
-        <div style={grid(4)}>{t.overview.statsRow2.map(([v,l,s,p,c],i)=><Stat key={i} value={v} label={l} sub={s} period={p} color={i===3?"#4a9a5a":wine}/>)}</div>
-        <div style={grid(3)}>{t.overview.statsRow3.map(([v,l,s,c],i)=><Stat key={i} value={v} label={l} sub={s} color={i===0?wine:"#b07030"}/>)}</div>
+        <div className="stat-grid" style={grid(4)}>{t.overview.statsRow1.map(([v,l,s,p],i)=><Stat key={i} value={v} label={l} sub={s} period={p}/>)}</div>
+        <div className="stat-grid" style={grid(4)}>{t.overview.statsRow2.map(([v,l,s,p,c],i)=><Stat key={i} value={v} label={l} sub={s} period={p} color={i===3?olive:crimson}/>)}</div>
+        <div className="stat-grid-3" style={grid(3)}>{t.overview.statsRow3.map(([v,l,s,c],i)=><Stat key={i} value={v} label={l} sub={s} color={i===0?crimson:sepia}/>)}</div>
 
-        <div style={sty.alert("wine")}>
-          <p style={{color:wineLight,fontWeight:700,fontSize:13,marginBottom:8}}>{t.overview.nberAlertTitle}</p>
-          <p style={{color:"#c4b89a",fontSize:13,lineHeight:1.7}}>{t.overview.nberAlertText}</p>
+        <div style={sty.alert("crimson")}>
+          <p style={{color:crimsonLight,fontWeight:700,fontSize:13,marginBottom:8}}>{t.overview.nberAlertTitle}</p>
+          <p style={{color:sepia,fontSize:13,lineHeight:1.7}}>{t.overview.nberAlertText}</p>
           <div style={{display:"flex",gap:8,marginTop:12,flexWrap:"wrap"}}>
-            <a href="https://www.nber.org/system/files/working_papers/w34060/w34060.pdf" target="_blank" rel="noopener" style={{background:"rgba(139,26,26,0.3)",color:goldLight,padding:"4px 12px",borderRadius:20,fontSize:10,textDecoration:"none"}}>📄 PDF (NBER)</a>
-            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5359609" target="_blank" rel="noopener" style={{background:"rgba(139,26,26,0.3)",color:goldLight,padding:"4px 12px",borderRadius:20,fontSize:10,textDecoration:"none"}}>📋 SSRN</a>
-            <a href="https://news.harvard.edu/gazette/story/2025/09/data-bolsters-theory-about-plunging-catholic-mass-attendance/" target="_blank" rel="noopener" style={{background:"rgba(139,26,26,0.3)",color:goldLight,padding:"4px 12px",borderRadius:20,fontSize:10,textDecoration:"none"}}>🎓 Harvard Gazette</a>
+            <a href="https://www.nber.org/system/files/working_papers/w34060/w34060.pdf" target="_blank" rel="noopener" style={{background:"rgba(155,35,53,0.1)",color:crimson,padding:"4px 12px",borderRadius:20,fontSize:10,textDecoration:"none"}}>PDF (NBER)</a>
+            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5359609" target="_blank" rel="noopener" style={{background:"rgba(155,35,53,0.1)",color:crimson,padding:"4px 12px",borderRadius:20,fontSize:10,textDecoration:"none"}}>SSRN</a>
+            <a href="https://news.harvard.edu/gazette/story/2025/09/data-bolsters-theory-about-plunging-catholic-mass-attendance/" target="_blank" rel="noopener" style={{background:"rgba(155,35,53,0.1)",color:crimson,padding:"4px 12px",borderRadius:20,fontSize:10,textDecoration:"none"}}>Harvard Gazette</a>
           </div>
         </div>
 
-        <Card><p style={{color:cream,fontWeight:600,marginBottom:10}}>{t.overview.educationTitle}</p>
-          <div style={grid(3)}>{t.overview.educationStats.map(([v,l,d],i)=><div key={i} style={{background:parchment,borderRadius:6,padding:10,textAlign:"center"}}><p style={{color:wineLight,fontWeight:800,fontSize:16}}>{v}</p><p style={{color:cream,fontSize:10,fontWeight:600}}>{l}</p><p style={{color:"#7a6e5a",fontSize:9}}>{d}</p></div>)}</div>
+        <Card><p style={{color:ink,fontWeight:600,marginBottom:10}}>{t.overview.educationTitle}</p>
+          <div className="stat-grid-3" style={grid(3)}>{t.overview.educationStats.map(([v,l,d],i)=><div key={i} style={{background:parchment,borderRadius:2,padding:10,textAlign:"center"}}><p style={{color:crimsonLight,fontWeight:800,fontSize:16}}>{v}</p><p style={{color:ink,fontSize:10,fontWeight:600}}>{l}</p><p style={{color:sepiaLight,fontSize:9}}>{d}</p></div>)}</div>
         </Card>
 
-        <Card><p style={{color:cream,fontWeight:600,marginBottom:10}}>{t.overview.exodusTitle}</p>
-          <div style={grid(3)}>{t.overview.exodusStats.map(([v,l,d],i)=><div key={i} style={{background:parchment,borderRadius:6,padding:10,textAlign:"center"}}><p style={{color:"#c09040",fontWeight:800,fontSize:16}}>{v}</p><p style={{color:cream,fontSize:10,fontWeight:600}}>{l}</p><p style={{color:"#7a6e5a",fontSize:9}}>{d}</p></div>)}</div>
+        <Card><p style={{color:ink,fontWeight:600,marginBottom:10}}>{t.overview.exodusTitle}</p>
+          <div className="stat-grid-3" style={grid(3)}>{t.overview.exodusStats.map(([v,l,d],i)=><div key={i} style={{background:parchment,borderRadius:2,padding:10,textAlign:"center"}}><p style={{color:goldLeaf,fontWeight:800,fontSize:16}}>{v}</p><p style={{color:ink,fontSize:10,fontWeight:600}}>{l}</p><p style={{color:sepiaLight,fontSize:9}}>{d}</p></div>)}</div>
         </Card>
       </>}
 
@@ -197,44 +197,44 @@ export default function App(){
           <Sub>{t.priests.sub_1}</Sub>
           <Chart>
             <ComposedChart data={priestsUSA}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#3d3529"/>
-              <XAxis dataKey="y" stroke="#8a7d68" fontSize={11} fontFamily="Georgia"/>
-              <YAxis stroke="#8a7d68" fontSize={10}/>
+              <CartesianGrid strokeDasharray="2 6" stroke={borderC} strokeOpacity={0.4}/>
+              <XAxis dataKey="y" stroke={sepia} fontSize={11} fontFamily="'Cormorant Garamond',serif"/>
+              <YAxis stroke={sepia} fontSize={10}/>
               <Tooltip content={<TT/>}/>
               <Legend/>
-              <Area type="monotone" dataKey="t" name={t.priests.chartLegend1[0]} fill="#5c1a1a" stroke={wine} fillOpacity={0.3}/>
-              <Line type="monotone" dataKey="a" name={t.priests.chartLegend1[1]} stroke={gold} strokeWidth={2} dot={{r:3}}/>
+              <Area type="monotone" dataKey="t" name={t.priests.chartLegend1[0]} fill="rgba(155,35,53,0.08)" stroke={crimson} fillOpacity={0.08}/>
+              <Line type="monotone" dataKey="a" name={t.priests.chartLegend1[1]} stroke={goldLeaf} strokeWidth={2} dot={{r:3}}/>
             </ComposedChart>
           </Chart>
         </Card>
-        <Orn/>
+        <Filigree/>
         <Card>
-          <H2 color={gold}>{t.priests.h2_2}</H2>
+          <H2 color={goldLeaf}>{t.priests.h2_2}</H2>
           <Sub>{t.priests.sub_2}</Sub>
           <Chart>
             <ComposedChart data={priestsWorld}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#3d3529"/>
-              <XAxis dataKey="y" stroke="#8a7d68" fontSize={11} fontFamily="Georgia"/>
-              <YAxis yAxisId="l" stroke="#8a7d68" fontSize={10}/>
-              <YAxis yAxisId="r" orientation="right" stroke="#8a7d68" fontSize={10}/>
+              <CartesianGrid strokeDasharray="2 6" stroke={borderC} strokeOpacity={0.4}/>
+              <XAxis dataKey="y" stroke={sepia} fontSize={11} fontFamily="'Cormorant Garamond',serif"/>
+              <YAxis yAxisId="l" stroke={sepia} fontSize={10}/>
+              <YAxis yAxisId="r" orientation="right" stroke={sepia} fontSize={10}/>
               <Tooltip content={<TT/>}/>
               <Legend/>
-              <Bar yAxisId="l" dataKey="p" name={t.priests.chartLegend2[0]} fill={wine} radius={[4,4,0,0]}/>
-              <Line yAxisId="r" type="monotone" dataKey="r" name={t.priests.chartLegend2[1]} stroke={gold} strokeWidth={2} dot={{r:4}}/>
+              <Bar yAxisId="l" dataKey="p" name={t.priests.chartLegend2[0]} fill={crimson} fillOpacity={0.7} radius={[2,2,0,0]}/>
+              <Line yAxisId="r" type="monotone" dataKey="r" name={t.priests.chartLegend2[1]} stroke={goldLeaf} strokeWidth={2} dot={{r:4}}/>
             </ComposedChart>
           </Chart>
         </Card>
-        <Orn/>
+        <Filigree/>
         <Card>
           <H2>{t.priests.h2_3}</H2>
           <Sub>{t.priests.sub_3}</Sub>
           <Chart h={260}>
             <BarChart data={francePriests}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#3d3529"/>
-              <XAxis dataKey="y" stroke="#8a7d68" fontSize={11} fontFamily="Georgia"/>
-              <YAxis stroke="#8a7d68" fontSize={10}/>
+              <CartesianGrid strokeDasharray="2 6" stroke={borderC} strokeOpacity={0.4}/>
+              <XAxis dataKey="y" stroke={sepia} fontSize={11} fontFamily="'Cormorant Garamond',serif"/>
+              <YAxis stroke={sepia} fontSize={10}/>
               <Tooltip content={<TT/>}/>
-              <Bar dataKey="p" name={t.priests.chartLegend3[0]} fill="#5c1a1a" radius={[4,4,0,0]}/>
+              <Bar dataKey="p" name={t.priests.chartLegend3[0]} fill={crimson} fillOpacity={0.7} radius={[2,2,0,0]}/>
             </BarChart>
           </Chart>
         </Card>
@@ -243,9 +243,9 @@ export default function App(){
           <H2 color={goldLight}>{t.priests.additionalTitle}</H2>
           <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:10,marginTop:8}}>
             {t.priests.additionalData.map(([v,d],i)=>(
-              <div key={i} style={{background:parchment,borderRadius:6,padding:"10px 14px"}}>
-                <span style={{color:gold,fontWeight:700,fontSize:14}}>{v}</span>
-                <span style={{color:"#a89a80",fontSize:11,marginLeft:8}}>{d}</span>
+              <div key={i} style={{background:parchment,borderRadius:2,padding:"10px 14px"}}>
+                <span style={{color:goldLeaf,fontWeight:700,fontSize:14}}>{v}</span>
+                <span style={{color:sepia,fontSize:11,marginLeft:8}}>{d}</span>
               </div>
             ))}
           </div>
@@ -255,13 +255,13 @@ export default function App(){
       {/* ══════════ NUNS ══════════ */}
       {sec==="nuns"&&<>
         <Card><H2>{t.nuns.h2}</H2><Sub>{t.nuns.sub}</Sub>
-          <Chart><ComposedChart data={nunsUSA}><CartesianGrid strokeDasharray="3 3" stroke="#3d3529"/><XAxis dataKey="y" stroke="#8a7d68" fontSize={11} fontFamily="Georgia"/><YAxis stroke="#8a7d68" fontSize={10}/><Tooltip content={<TT/>}/><Area type="monotone" dataKey="n" name={t.nuns.chartLegend[0]} fill="rgba(139,26,26,0.3)" stroke={wine} fillOpacity={0.4}/></ComposedChart></Chart>
+          <Chart><ComposedChart data={nunsUSA}><CartesianGrid strokeDasharray="2 6" stroke={borderC} strokeOpacity={0.4}/><XAxis dataKey="y" stroke={sepia} fontSize={11} fontFamily="'Cormorant Garamond',serif"/><YAxis stroke={sepia} fontSize={10}/><Tooltip content={<TT/>}/><Area type="monotone" dataKey="n" name={t.nuns.chartLegend[0]} fill="rgba(155,35,53,0.08)" stroke={crimson} fillOpacity={0.08}/></ComposedChart></Chart>
         </Card>
-        <div style={sty.alert("wine")}><p style={{color:wineLight,fontWeight:700,fontSize:12,marginBottom:8}}>{t.nuns.declineTitle}</p>
-          <div style={grid(6)}>{t.nuns.intlDecline.map(([c,d],i)=><div key={i} style={{background:"rgba(139,26,26,0.15)",borderRadius:6,padding:8,textAlign:"center"}}><p style={{color:wineLight,fontWeight:800}}>{d}</p><p style={{color:"#8a7d68",fontSize:10}}>{c}</p></div>)}</div>
+        <div style={sty.alert("crimson")}><p style={{color:crimsonLight,fontWeight:700,fontSize:12,marginBottom:8}}>{t.nuns.declineTitle}</p>
+          <div className="stat-grid-6" style={grid(6)}>{t.nuns.intlDecline.map(([c,d],i)=><div key={i} style={{background:"rgba(155,35,53,0.06)",borderRadius:2,padding:8,textAlign:"center"}}><p style={{color:crimsonLight,fontWeight:800}}>{d}</p><p style={{color:sepiaLight,fontSize:10}}>{c}</p></div>)}</div>
         </div>
-        <Card><p style={{color:"#c4b89a",fontSize:13,lineHeight:1.7}}><span style={{color:cream,fontWeight:600}}>{t.nuns.worldDataLabel}</span> {t.nuns.worldDataText}</p></Card>
-        <Card><p style={{color:cream,fontWeight:600,marginBottom:6}}>{t.nuns.educationImpactTitle}</p><p style={{color:"#c4b89a",fontSize:13,lineHeight:1.7}}>{t.nuns.educationImpactText}</p></Card>
+        <Card><p style={{color:sepia,fontSize:13,lineHeight:1.7}}><span style={{color:ink,fontWeight:600}}>{t.nuns.worldDataLabel}</span> {t.nuns.worldDataText}</p></Card>
+        <Card><p style={{color:ink,fontWeight:600,marginBottom:6}}>{t.nuns.educationImpactTitle}</p><p style={{color:sepia,fontSize:13,lineHeight:1.7}}>{t.nuns.educationImpactText}</p></Card>
       </>}
 
       {/* ══════════ MASS / FAITH ══════════ */}
@@ -271,51 +271,51 @@ export default function App(){
           <Sub>{t.mass.sub}</Sub>
           <Chart>
             <LineChart data={massAtt}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#3d3529"/>
-              <XAxis dataKey="y" stroke="#8a7d68" fontSize={11} fontFamily="Georgia"/>
-              <YAxis stroke="#8a7d68" fontSize={10} domain={[30,80]} unit="%"/>
+              <CartesianGrid strokeDasharray="2 6" stroke={borderC} strokeOpacity={0.4}/>
+              <XAxis dataKey="y" stroke={sepia} fontSize={11} fontFamily="'Cormorant Garamond',serif"/>
+              <YAxis stroke={sepia} fontSize={10} domain={[30,80]} unit="%"/>
               <Tooltip content={<TT/>}/>
               <Legend/>
-              <Line type="monotone" dataKey="cat" name={t.mass.chartLegends[0]} stroke={wine} strokeWidth={3} dot={{r:5}}/>
-              <Line type="monotone" dataKey="prot" name={t.mass.chartLegends[1]} stroke="#4a6fa5" strokeWidth={3} dot={{r:5}}/>
+              <Line type="monotone" dataKey="cat" name={t.mass.chartLegends[0]} stroke={crimson} strokeWidth={3} dot={{r:5}}/>
+              <Line type="monotone" dataKey="prot" name={t.mass.chartLegends[1]} stroke={ultramarine} strokeWidth={3} dot={{r:5}}/>
             </LineChart>
           </Chart>
         </Card>
 
         <Card>
-          <p style={{color:cream,fontWeight:700,fontSize:14,marginBottom:10}}>{t.mass.europeanTitle}</p>
-          <div style={grid(3)}>
+          <p style={{color:ink,fontWeight:700,fontSize:14,marginBottom:10}}>{t.mass.europeanTitle}</p>
+          <div className="stat-grid-3" style={grid(3)}>
             {[[t.mass.countries.france,"27%","4.5%","1965-2009"],[t.mass.countries.ireland,"~90%","~30%","1965-2020"],[t.mass.countries.netherlands,"~65%","<10%","1965-2010"]].map(([c,f,to,p],i)=>(
-              <div key={i} style={{background:parchment,borderRadius:6,padding:12,textAlign:"center"}}>
-                <p style={{color:cream,fontWeight:700,fontSize:13}}>{c}</p>
-                <p style={{color:wineLight,fontSize:11}}>{f} → {to}</p>
-                <p style={{color:"#6b6052",fontSize:10}}>{p}</p>
+              <div key={i} style={{background:parchment,borderRadius:2,padding:12,textAlign:"center"}}>
+                <p style={{color:ink,fontWeight:700,fontSize:13}}>{c}</p>
+                <p style={{color:crimsonLight,fontSize:11}}>{f} → {to}</p>
+                <p style={{color:sepiaLight,fontSize:10}}>{p}</p>
               </div>
             ))}
           </div>
         </Card>
 
-        <div style={sty.alert("wine")}>
-          <p style={{color:wineLight,fontWeight:700,fontSize:13,marginBottom:6}}>{t.mass.transAlertTitle}</p>
-          <p style={{color:"#c4b89a",fontSize:12,lineHeight:1.7,marginBottom:12}}>{t.mass.transIntro}</p>
+        <div style={sty.alert("crimson")}>
+          <p style={{color:crimsonLight,fontWeight:700,fontSize:13,marginBottom:6}}>{t.mass.transAlertTitle}</p>
+          <p style={{color:sepia,fontSize:12,lineHeight:1.7,marginBottom:12}}>{t.mass.transIntro}</p>
           <div style={grid(2)}>
             {t.mass.transStats.map(([v,l],i)=>(
-              <div key={i} style={{background:"rgba(139,26,26,0.15)",borderRadius:6,padding:"10px 14px",textAlign:"center"}}>
-                <p style={{fontSize:22,fontWeight:900,color:wine,fontFamily:"Georgia,serif"}}>{v}</p>
-                <p style={{color:"#c4b89a",fontSize:10,marginTop:4}}>{l}</p>
+              <div key={i} style={{background:"rgba(155,35,53,0.06)",borderRadius:2,padding:"10px 14px",textAlign:"center"}}>
+                <p style={{fontSize:22,fontWeight:900,color:crimson,fontFamily:"'Cinzel',serif"}}>{v}</p>
+                <p style={{color:sepia,fontSize:10,marginTop:4}}>{l}</p>
               </div>
             ))}
           </div>
-          <p style={{color:"#a89a80",fontSize:11,marginTop:12,lineHeight:1.6}}>{t.mass.transDetail}</p>
+          <p style={{color:sepiaLight,fontSize:11,marginTop:12,lineHeight:1.6}}>{t.mass.transDetail}</p>
         </div>
 
         <div style={sty.alert("gold")}>
-          <p style={{color:gold,fontSize:12,fontStyle:"italic",lineHeight:1.6}}>{t.mass.barronQuote}</p>
+          <p style={{color:goldLeaf,fontSize:12,fontStyle:"italic",lineHeight:1.6}}>{t.mass.barronQuote}</p>
         </div>
 
         <Card>
           <H2 color={goldLight}>{t.mass.liturgicalTitle}</H2>
-          <p style={{color:"#c4b89a",fontSize:12,lineHeight:1.7}}>{t.mass.liturgicalText}</p>
+          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.mass.liturgicalText}</p>
         </Card>
       </>}
 
@@ -326,19 +326,19 @@ export default function App(){
           <Sub>{t.marriages.sub}</Sub>
           <Chart>
             <ComposedChart data={marriages}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#3d3529"/>
-              <XAxis dataKey="y" stroke="#8a7d68" fontSize={11} fontFamily="Georgia"/>
-              <YAxis yAxisId="l" stroke="#8a7d68" fontSize={10}/>
-              <YAxis yAxisId="r" orientation="right" stroke="#8a7d68" fontSize={10} unit="M"/>
+              <CartesianGrid strokeDasharray="2 6" stroke={borderC} strokeOpacity={0.4}/>
+              <XAxis dataKey="y" stroke={sepia} fontSize={11} fontFamily="'Cormorant Garamond',serif"/>
+              <YAxis yAxisId="l" stroke={sepia} fontSize={10}/>
+              <YAxis yAxisId="r" orientation="right" stroke={sepia} fontSize={10} unit="M"/>
               <Tooltip content={<TT/>}/>
               <Legend/>
-              <Bar yAxisId="l" dataKey="m" name={t.marriages.chartLegends[0]} fill={wine} radius={[4,4,0,0]}/>
-              <Line yAxisId="r" type="monotone" dataKey="c" name={t.marriages.chartLegends[1]} stroke="#6b8cae" strokeWidth={2} dot={{r:4}}/>
+              <Bar yAxisId="l" dataKey="m" name={t.marriages.chartLegends[0]} fill={crimson} fillOpacity={0.7} radius={[2,2,0,0]}/>
+              <Line yAxisId="r" type="monotone" dataKey="c" name={t.marriages.chartLegends[1]} stroke={ultramarine} strokeWidth={2} dot={{r:4}}/>
             </ComposedChart>
           </Chart>
         </Card>
         <Card>
-          <p style={{color:"#c4b89a",fontSize:12,lineHeight:1.7}}>{t.marriages.feedbackCycle}</p>
+          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.marriages.feedbackCycle}</p>
         </Card>
       </>}
 
@@ -351,25 +351,25 @@ export default function App(){
             {orders.map((o,i)=>{
               const pd=Math.round((1-o.p2/o.p1)*100), sd=Math.round((1-o.s2/o.s1)*100);
               return(
-                <div key={i} style={{background:parchment,borderRadius:6,padding:14}}>
-                  <p style={{color:cream,fontWeight:700,fontSize:14,marginBottom:8}}>{o.o}</p>
+                <div key={i} style={{background:parchment,borderRadius:2,padding:14}}>
+                  <p style={{color:ink,fontWeight:700,fontSize:14,marginBottom:8}}>{o.o}</p>
                   <div style={grid(2)}>
                     <div>
-                      <p style={{color:"#8a7d68",fontSize:10,marginBottom:4}}>{t.orders.labels[0]}</p>
+                      <p style={{color:sepiaLight,fontSize:10,marginBottom:4}}>{t.orders.labels[0]}</p>
                       <p style={{fontSize:12}}>
-                        <span style={{color:"#c4b89a"}}>{o.p1.toLocaleString()}</span>
-                        <span style={{color:wineLight}}> → </span>
-                        <span style={{color:wineLight,fontWeight:700}}>{o.p2.toLocaleString()}</span>
-                        <span style={{color:wine,fontSize:10,fontWeight:600,marginLeft:4}}>(-{pd}%)</span>
+                        <span style={{color:sepia}}>{o.p1.toLocaleString()}</span>
+                        <span style={{color:crimsonLight}}> → </span>
+                        <span style={{color:crimsonLight,fontWeight:700}}>{o.p2.toLocaleString()}</span>
+                        <span style={{color:crimson,fontSize:10,fontWeight:600,marginLeft:4}}>(-{pd}%)</span>
                       </p>
                     </div>
                     <div>
-                      <p style={{color:"#8a7d68",fontSize:10,marginBottom:4}}>{t.orders.labels[1]}</p>
+                      <p style={{color:sepiaLight,fontSize:10,marginBottom:4}}>{t.orders.labels[1]}</p>
                       <p style={{fontSize:12}}>
-                        <span style={{color:"#c4b89a"}}>{o.s1.toLocaleString()}</span>
-                        <span style={{color:wineLight}}> → </span>
-                        <span style={{color:wineLight,fontWeight:700}}>{o.s2}</span>
-                        <span style={{color:wine,fontSize:10,fontWeight:600,marginLeft:4}}>(-{sd}%)</span>
+                        <span style={{color:sepia}}>{o.s1.toLocaleString()}</span>
+                        <span style={{color:crimsonLight}}> → </span>
+                        <span style={{color:crimsonLight,fontWeight:700}}>{o.s2}</span>
+                        <span style={{color:crimson,fontSize:10,fontWeight:600,marginLeft:4}}>(-{sd}%)</span>
                       </p>
                     </div>
                   </div>
@@ -379,36 +379,36 @@ export default function App(){
           </div>
         </Card>
 
-        <div style={sty.alert("wine")}>
-          <p style={{color:wineLight,fontWeight:700,fontSize:13,marginBottom:6}}>{t.orders.impactTitle}</p>
-          <p style={{color:"#c4b89a",fontSize:12,lineHeight:1.7}}>{t.orders.impactText}</p>
+        <div style={sty.alert("crimson")}>
+          <p style={{color:crimsonLight,fontWeight:700,fontSize:13,marginBottom:6}}>{t.orders.impactTitle}</p>
+          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.orders.impactText}</p>
         </div>
 
         <Card>
           <H2 color={goldLight}>{t.orders.seminariesTitle}</H2>
-          <p style={{color:"#c4b89a",fontSize:12,lineHeight:1.7}}>{t.orders.seminariesText}</p>
+          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.orders.seminariesText}</p>
         </Card>
 
-        <div style={sty.alert("wine")}>
-          <p style={{color:wineLight,fontWeight:700,fontSize:13,marginBottom:6}}>{t.orders.caraAlert}</p>
-          <p style={{color:"#c4b89a",fontSize:12,lineHeight:1.7}}>{t.orders.caraDetail}</p>
+        <div style={sty.alert("crimson")}>
+          <p style={{color:crimsonLight,fontWeight:700,fontSize:13,marginBottom:6}}>{t.orders.caraAlert}</p>
+          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.orders.caraDetail}</p>
         </div>
       </>}
 
       {/* ══════════ REGIONAL ══════════ */}
       {sec==="regional"&&<>
         <Card>
-          <H2 color={gold}>{t.regional.h2}</H2>
+          <H2 color={goldLeaf}>{t.regional.h2}</H2>
           <Sub>{t.regional.sub}</Sub>
           <Chart h={260}>
             <BarChart data={regional} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" stroke="#3d3529"/>
-              <XAxis type="number" stroke="#8a7d68" fontSize={10}/>
-              <YAxis type="category" dataKey="r" stroke="#8a7d68" fontSize={11} width={70}/>
+              <CartesianGrid strokeDasharray="2 6" stroke={borderC} strokeOpacity={0.4}/>
+              <XAxis type="number" stroke={sepia} fontSize={10}/>
+              <YAxis type="category" dataKey="r" stroke={sepia} fontSize={11} width={70} fontFamily="'Cormorant Garamond',serif"/>
               <Tooltip content={<TT/>}/>
-              <Bar dataKey="v" name={t.regional.chartLegend[0]} radius={[0,4,4,0]}>
+              <Bar dataKey="v" name={t.regional.chartLegend[0]} radius={[0,2,2,0]}>
                 {regional.map((e,i)=>(
-                  <Cell key={i} fill={e.v>0?"#2e7d32":"#b44040"}/>
+                  <Cell key={i} fill={e.v>0?olive:crimsonLight}/>
                 ))}
               </Bar>
             </BarChart>
@@ -417,18 +417,18 @@ export default function App(){
 
         <div style={grid(2)}>
           <div style={sty.alert("green")}>
-            <p style={{color:"#4caf50",fontWeight:700,fontSize:13,marginBottom:6}}>{t.regional.growthTitle}</p>
-            <p style={{color:"#c4b89a",fontSize:12,lineHeight:1.7}}>{t.regional.growthText}</p>
+            <p style={{color:olive,fontWeight:700,fontSize:13,marginBottom:6}}>{t.regional.growthTitle}</p>
+            <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.regional.growthText}</p>
           </div>
-          <div style={sty.alert("wine")}>
-            <p style={{color:wineLight,fontWeight:700,fontSize:13,marginBottom:6}}>{t.regional.deathTitle}</p>
-            <p style={{color:"#c4b89a",fontSize:12,lineHeight:1.7}}>{t.regional.deathText}</p>
+          <div style={sty.alert("crimson")}>
+            <p style={{color:crimsonLight,fontWeight:700,fontSize:13,marginBottom:6}}>{t.regional.deathTitle}</p>
+            <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.regional.deathText}</p>
           </div>
         </div>
 
         <Card>
-          <p style={{color:cream,fontWeight:700,fontSize:14,marginBottom:6}}>{t.regional.mexicoTitle}</p>
-          <p style={{color:"#c4b89a",fontSize:12,lineHeight:1.7}}>{t.regional.mexicoText}</p>
+          <p style={{color:ink,fontWeight:700,fontSize:14,marginBottom:6}}>{t.regional.mexicoTitle}</p>
+          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.regional.mexicoText}</p>
         </Card>
       </>}
 
