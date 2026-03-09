@@ -434,47 +434,47 @@ export default function App(){
 
       {/* ══════════ SSPX ══════════ */}
       {sec==="sspx"&&<>
-        <Card style={{background:"linear-gradient(135deg, rgba(34,120,60,0.1) 0%, #1a1814 100%)",border:"1px solid rgba(34,120,60,0.3)"}}>
-          <H2 color="#4caf50">{t.sspx.h2}</H2>
-          <p style={{color:"#c4b89a",fontSize:13,lineHeight:1.7}}>{t.sspx.intro}</p>
+        <Card style={{background:`linear-gradient(135deg, rgba(74,92,58,0.08) 0%, ${parchmentDark} 100%)`,border:"1px solid rgba(74,92,58,0.3)"}}>
+          <H2 color={olive}>{t.sspx.h2}</H2>
+          <p className="drop-cap" style={{color:sepia,fontSize:13,lineHeight:1.7}}>{t.sspx.intro}</p>
         </Card>
 
-        <div style={grid(4)}>
-          {t.sspx.stats.map(([v,l,s],i)=><Stat key={i} value={v} label={l} sub={s} color="#2e7d32"/>)}
+        <div className="stat-grid" style={grid(4)}>
+          {t.sspx.stats.map(([v,l,s],i)=><Stat key={i} value={v} label={l} sub={s} color={olive}/>)}
         </div>
 
         <Card>
-          <H2 color="#4caf50">{t.sspx.growthH2}</H2>
+          <H2 color={olive}>{t.sspx.growthH2}</H2>
           <Sub>{t.sspx.growthSub}</Sub>
           <Chart>
             <ComposedChart data={sspxP}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#3d3529"/>
-              <XAxis dataKey="y" stroke="#8a7d68" fontSize={11} fontFamily="Georgia"/>
-              <YAxis stroke="#8a7d68" fontSize={10}/>
+              <CartesianGrid strokeDasharray="2 6" stroke={borderC} strokeOpacity={0.4}/>
+              <XAxis dataKey="y" stroke={sepia} fontSize={11} fontFamily="'Cormorant Garamond',serif"/>
+              <YAxis stroke={sepia} fontSize={10}/>
               <Tooltip content={<TT/>}/>
-              <Area type="monotone" dataKey="p" name={t.sspx.chartLegend[0]} fill="rgba(34,120,60,0.2)" stroke="#4caf50" fillOpacity={0.4} strokeWidth={3}/>
+              <Area type="monotone" dataKey="p" name={t.sspx.chartLegend[0]} fill="rgba(74,92,58,0.08)" stroke={olive} fillOpacity={0.08} strokeWidth={3}/>
             </ComposedChart>
           </Chart>
         </Card>
 
         <Card>
-          <H2 color={cream}>{t.sspx.tableH2}</H2>
+          <H2 color={ink}>{t.sspx.tableH2}</H2>
           <div style={{overflowX:"auto"}}>
             <table style={{width:"100%",fontSize:11,borderCollapse:"collapse"}}>
               <thead>
                 <tr style={{borderBottom:`1px solid ${borderC}`}}>
-                  {t.sspx.tableHeaders.map((h,i)=><th key={i} style={{textAlign:"left",padding:"8px 10px",color:"#8a7d68",fontWeight:500}}>{h}</th>)}
+                  {t.sspx.tableHeaders.map((h,i)=><th key={i} style={{textAlign:"left",padding:"8px 10px",color:sepiaLight,fontWeight:500}}>{h}</th>)}
                 </tr>
               </thead>
               <tbody>
                 {sspxDetail.map((r,i)=>(
-                  <tr key={i} style={{borderBottom:`1px solid #2a2520`}}>
-                    <td style={{padding:"6px 10px",color:cream,fontWeight:600}}>{r.y}</td>
-                    <td style={{padding:"6px 10px",color:"#4caf50",fontWeight:700}}>{r.p}</td>
-                    <td style={{padding:"6px 10px",color:"#c4b89a"}}>{r.s}</td>
-                    <td style={{padding:"6px 10px",color:"#c4b89a"}}>{r.b}</td>
-                    <td style={{padding:"6px 10px",color:"#c4b89a"}}>{r.pr}</td>
-                    <td style={{padding:"6px 10px",color:"#c4b89a"}}>{r.ch}</td>
+                  <tr key={i} style={{borderBottom:`1px solid ${borderC}`}}>
+                    <td style={{padding:"6px 10px",color:ink,fontWeight:600}}>{r.y}</td>
+                    <td style={{padding:"6px 10px",color:olive,fontWeight:700}}>{r.p}</td>
+                    <td style={{padding:"6px 10px",color:sepia}}>{r.s}</td>
+                    <td style={{padding:"6px 10px",color:sepia}}>{r.b}</td>
+                    <td style={{padding:"6px 10px",color:sepia}}>{r.pr}</td>
+                    <td style={{padding:"6px 10px",color:sepia}}>{r.ch}</td>
                   </tr>
                 ))}
               </tbody>
@@ -483,39 +483,39 @@ export default function App(){
         </Card>
 
         <Card>
-          <H2 color={cream}>{t.sspx.comparisonH2}</H2>
+          <H2 color={ink}>{t.sspx.comparisonH2}</H2>
           <Chart h={220}>
             <BarChart data={tradComp} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" stroke="#3d3529"/>
-              <XAxis type="number" stroke="#8a7d68" fontSize={10}/>
-              <YAxis type="category" dataKey="n" stroke="#8a7d68" fontSize={11} width={50}/>
+              <CartesianGrid strokeDasharray="2 6" stroke={borderC} strokeOpacity={0.4}/>
+              <XAxis type="number" stroke={sepia} fontSize={10}/>
+              <YAxis type="category" dataKey="n" stroke={sepia} fontSize={11} width={50} fontFamily="'Cormorant Garamond',serif"/>
               <Tooltip content={<TT/>}/>
               <Legend/>
-              <Bar dataKey="p" name={t.sspx.comparisonLegends[0]} fill="#4caf50" radius={[0,4,4,0]}/>
-              <Bar dataKey="s" name={t.sspx.comparisonLegends[1]} fill="#2e7d32" radius={[0,4,4,0]}/>
+              <Bar dataKey="p" name={t.sspx.comparisonLegends[0]} fill={olive} radius={[0,2,2,0]}/>
+              <Bar dataKey="s" name={t.sspx.comparisonLegends[1]} fill="rgba(74,92,58,0.5)" radius={[0,2,2,0]}/>
             </BarChart>
           </Chart>
-          <div style={grid(3,12)}>
+          <div className="stat-grid-3" style={grid(3,12)}>
             {tradComp.map((c,i)=>(
-              <div key={i} style={{background:parchment,borderRadius:6,padding:10,textAlign:"center"}}>
-                <p style={{color:cream,fontWeight:700,fontSize:13}}>{c.n}</p>
-                <p style={{color:"#4caf50",fontSize:10}}>{c.p} {t.sspx.comparisonLabels[0]} - {c.m} {t.sspx.comparisonLabels[1]}</p>
-                <p style={{color:"#6b6052",fontSize:10}}>{c.c} {t.sspx.comparisonLabels[2]}</p>
+              <div key={i} style={{background:parchment,borderRadius:2,padding:10,textAlign:"center"}}>
+                <p style={{color:ink,fontWeight:700,fontSize:13}}>{c.n}</p>
+                <p style={{color:olive,fontSize:10}}>{c.p} {t.sspx.comparisonLabels[0]} - {c.m} {t.sspx.comparisonLabels[1]}</p>
+                <p style={{color:sepiaLight,fontSize:10}}>{c.c} {t.sspx.comparisonLabels[2]}</p>
               </div>
             ))}
           </div>
         </Card>
 
-        <div style={{background:"linear-gradient(90deg, rgba(139,26,26,0.1) 0%, rgba(34,120,60,0.1) 100%)",borderRadius:8,padding:20,border:`1px solid ${borderC}`}}>
-          <h3 style={{color:cream,fontWeight:700,fontSize:16,marginBottom:12}}>{t.sspx.contrastTitle}</h3>
+        <div style={{background:`linear-gradient(90deg, rgba(155,35,53,0.06) 0%, rgba(74,92,58,0.06) 100%)`,borderRadius:2,padding:20,border:`1px solid ${borderC}`}}>
+          <h3 style={{color:ink,fontWeight:700,fontSize:16,marginBottom:12}}>{t.sspx.contrastTitle}</h3>
           <div style={grid(2)}>
             <div>
-              <p style={{color:wineLight,fontWeight:600,fontSize:12,marginBottom:6}}>Conciliar (2023)</p>
-              {t.sspx.conciliarStats.map((s,i)=><p key={i} style={{color:"#c4b89a",fontSize:11,marginBottom:3}}>- {s}</p>)}
+              <p style={{color:crimsonLight,fontWeight:600,fontSize:12,marginBottom:6}}>Conciliar (2023)</p>
+              {t.sspx.conciliarStats.map((s,i)=><p key={i} style={{color:sepia,fontSize:11,marginBottom:3}}>- {s}</p>)}
             </div>
             <div>
-              <p style={{color:"#4caf50",fontWeight:600,fontSize:12,marginBottom:6}}>FSSPX</p>
-              {t.sspx.fsspxStats.map((s,i)=><p key={i} style={{color:"#c4b89a",fontSize:11,marginBottom:3}}>- {s}</p>)}
+              <p style={{color:olive,fontWeight:600,fontSize:12,marginBottom:6}}>FSSPX</p>
+              {t.sspx.fsspxStats.map((s,i)=><p key={i} style={{color:sepia,fontSize:11,marginBottom:3}}>- {s}</p>)}
             </div>
           </div>
         </div>
@@ -523,25 +523,25 @@ export default function App(){
 
       {/* ══════════ NOVUS ORDO ══════════ */}
       {sec==="novusordo"&&<>
-        <Card style={{background:"linear-gradient(135deg, rgba(100,50,120,0.1) 0%, #1a1814 100%)",border:"1px solid rgba(100,50,120,0.3)"}}>
-          <H2 color="#b388d9">{t.novusordo.h2}</H2>
-          <p style={{color:"#c4b89a",fontSize:13,lineHeight:1.7}}>{t.novusordo.intro}</p>
+        <Card style={{background:`linear-gradient(135deg, rgba(30,58,95,0.08) 0%, ${parchmentDark} 100%)`,border:"1px solid rgba(30,58,95,0.2)"}}>
+          <H2 color={ultramarine}>{t.novusordo.h2}</H2>
+          <p className="drop-cap" style={{color:sepia,fontSize:13,lineHeight:1.7}}>{t.novusordo.intro}</p>
         </Card>
 
         <Card>
-          <H2 color="#b388d9">{t.novusordo.timelineH2}</H2>
+          <H2 color={ultramarine}>{t.novusordo.timelineH2}</H2>
           <div style={{display:"flex",flexDirection:"column",gap:12,marginTop:12}}>
             {t.novusordo.timeline.map(([yr,ev,det],i)=>(
               <div key={i} style={{display:"flex",gap:12}}>
                 <div style={{flexShrink:0,width:40,textAlign:"right"}}>
-                  <span style={{color:"#b388d9",fontWeight:700,fontSize:11}}>{yr}</span>
+                  <span style={{color:ultramarine,fontWeight:700,fontSize:11}}>{yr}</span>
                 </div>
-                <div style={{flexShrink:0,width:1,background:"#6b4d8a",position:"relative"}}>
-                  <div style={{position:"absolute",top:4,left:-3,width:7,height:7,borderRadius:"50%",background:"#b388d9"}}/>
+                <div style={{flexShrink:0,width:1,background:"rgba(30,58,95,0.4)",position:"relative"}}>
+                  <div style={{position:"absolute",top:4,left:-3,width:7,height:7,borderRadius:"50%",background:ultramarine}}/>
                 </div>
                 <div style={{paddingBottom:4}}>
-                  <p style={{color:cream,fontWeight:600,fontSize:13}}>{ev}</p>
-                  <p style={{color:"#a89a80",fontSize:11,lineHeight:1.6}}>{det}</p>
+                  <p style={{color:ink,fontWeight:600,fontSize:13}}>{ev}</p>
+                  <p style={{color:sepia,fontSize:11,lineHeight:1.6}}>{det}</p>
                 </div>
               </div>
             ))}
@@ -549,45 +549,45 @@ export default function App(){
         </Card>
 
         <Card>
-          <h3 style={{color:cream,fontWeight:700,fontSize:18,marginBottom:4}}>{t.novusordo.offertoryTitle}</h3>
-          <p style={{color:"#6b6052",fontSize:11,marginBottom:16}}>{t.novusordo.offertorySubtitle}</p>
+          <h3 style={{color:ink,fontWeight:700,fontSize:18,marginBottom:4,fontFamily:"'Cinzel',serif"}}>{t.novusordo.offertoryTitle}</h3>
+          <p style={{color:sepiaLight,fontSize:11,marginBottom:16}}>{t.novusordo.offertorySubtitle}</p>
           <div style={grid(2)}>
-            <div style={{background:"rgba(201,168,76,0.06)",border:"1px solid rgba(201,168,76,0.2)",borderRadius:8,padding:16}}>
-              <p style={{color:gold,fontWeight:700,fontSize:12,marginBottom:8}}>{t.novusordo.traditionalTitle}</p>
-              <p style={{color:"#c4b89a",fontSize:11,lineHeight:1.7,fontStyle:"italic"}}>{t.novusordo.traditionalText}</p>
-              <p style={{color:"rgba(201,168,76,0.5)",fontSize:10,marginTop:8}}>{t.novusordo.traditionalNote}</p>
+            <div style={{background:"rgba(184,150,62,0.08)",border:"1px solid rgba(184,150,62,0.3)",borderRadius:2,padding:16}}>
+              <p style={{color:goldLeaf,fontWeight:700,fontSize:12,marginBottom:8}}>{t.novusordo.traditionalTitle}</p>
+              <p style={{color:sepia,fontSize:11,lineHeight:1.7,fontStyle:"italic"}}>{t.novusordo.traditionalText}</p>
+              <p style={{color:"rgba(184,150,62,0.5)",fontSize:10,marginTop:8}}>{t.novusordo.traditionalNote}</p>
             </div>
-            <div style={{background:"rgba(139,26,26,0.08)",border:"1px solid rgba(139,26,26,0.25)",borderRadius:8,padding:16}}>
-              <p style={{color:wineLight,fontWeight:700,fontSize:12,marginBottom:8}}>{t.novusordo.noTitle}</p>
-              <p style={{color:"#c4b89a",fontSize:11,lineHeight:1.7,fontStyle:"italic"}}>{t.novusordo.noText}</p>
-              <p style={{color:"rgba(180,64,64,0.5)",fontSize:10,marginTop:8}}>{t.novusordo.noNote}</p>
+            <div style={{background:"rgba(155,35,53,0.06)",border:"1px solid rgba(155,35,53,0.25)",borderRadius:2,padding:16}}>
+              <p style={{color:crimsonLight,fontWeight:700,fontSize:12,marginBottom:8}}>{t.novusordo.noTitle}</p>
+              <p style={{color:sepia,fontSize:11,lineHeight:1.7,fontStyle:"italic"}}>{t.novusordo.noText}</p>
+              <p style={{color:"rgba(184,58,75,0.5)",fontSize:10,marginTop:8}}>{t.novusordo.noNote}</p>
             </div>
           </div>
-          <div style={{background:parchment,borderRadius:6,padding:12,marginTop:12}}>
-            <p style={{color:"#a89a80",fontSize:11,lineHeight:1.6}}>{t.novusordo.consiliumNote}</p>
+          <div style={{background:parchment,borderRadius:2,padding:12,marginTop:12}}>
+            <p style={{color:sepia,fontSize:11,lineHeight:1.6}}>{t.novusordo.consiliumNote}</p>
           </div>
         </Card>
 
         <Card>
-          <h3 style={{color:cream,fontWeight:700,fontSize:16,marginBottom:12}}>{t.novusordo.structuralTitle}</h3>
+          <h3 style={{color:ink,fontWeight:700,fontSize:16,marginBottom:12,fontFamily:"'Cinzel',serif"}}>{t.novusordo.structuralTitle}</h3>
           <div style={{display:"flex",flexDirection:"column",gap:4}}>
             {t.novusordo.structuralRows.map(([a,tr,n],i)=>(
-              <div key={i} style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8,fontSize:11,padding:"8px 0",borderBottom:i<t.novusordo.structuralRows.length-1?`1px solid ${parchment}`:"none"}}>
-                <span style={{color:"#8a7d68",fontWeight:500}}>{a}</span>
-                <span style={{color:"rgba(232,212,139,0.8)"}}>{tr}</span>
-                <span style={{color:"rgba(180,64,64,0.8)"}}>{n}</span>
+              <div key={i} style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8,fontSize:11,padding:"8px 0",borderBottom:i<t.novusordo.structuralRows.length-1?`1px solid ${borderC}`:"none"}}>
+                <span style={{color:sepiaLight,fontWeight:500}}>{a}</span>
+                <span style={{color:goldLeaf}}>{tr}</span>
+                <span style={{color:crimsonLight}}>{n}</span>
               </div>
             ))}
           </div>
         </Card>
 
         <Card>
-          <h3 style={{color:cream,fontWeight:700,fontSize:16,marginBottom:12}}>{t.novusordo.testimoniesTitle}</h3>
+          <h3 style={{color:ink,fontWeight:700,fontSize:16,marginBottom:12,fontFamily:"'Cinzel',serif"}}>{t.novusordo.testimoniesTitle}</h3>
           <div style={{display:"flex",flexDirection:"column",gap:10}}>
             {t.novusordo.testimonies.map(([who,quote],i)=>(
-              <div key={i} style={{background:"rgba(100,50,120,0.08)",border:"1px solid rgba(100,50,120,0.2)",borderRadius:6,padding:12}}>
-                <p style={{color:"#b388d9",fontWeight:600,fontSize:11,marginBottom:4}}>{who}</p>
-                <p style={{color:"#c4b89a",fontSize:11,fontStyle:"italic",lineHeight:1.6}}>{quote}</p>
+              <div key={i} style={{background:"rgba(30,58,95,0.06)",border:"1px solid rgba(30,58,95,0.15)",borderRadius:2,padding:12}}>
+                <p style={{color:ultramarine,fontWeight:600,fontSize:11,marginBottom:4}}>{who}</p>
+                <p style={{color:sepia,fontSize:11,fontStyle:"italic",lineHeight:1.6}}>{quote}</p>
               </div>
             ))}
           </div>
@@ -596,25 +596,25 @@ export default function App(){
 
       {/* ══════════ CONCLUSION ══════════ */}
       {sec==="conclusion"&&<>
-        <Card><H2 color={cream}>{t.conclusion.h2}</H2><Orn/>
-          <div style={{color:"#c4b89a",fontSize:13,lineHeight:1.8}}>
-            <p style={{marginBottom:12}}>{t.conclusion.intro1}</p>
+        <Card><H2 color={ink}>{t.conclusion.h2}</H2><Orn/>
+          <div style={{color:sepia,fontSize:13,lineHeight:1.8}}>
+            <p className="drop-cap" style={{marginBottom:12}}>{t.conclusion.intro1}</p>
             <p style={{marginBottom:12}}>{t.conclusion.intro2}</p>
-            <div style={{background:parchment,borderRadius:6,padding:14,margin:"14px 0"}}><p style={{color:cream,fontWeight:600,marginBottom:8}}>{t.conclusion.collapseSummaryTitle}</p>
-              <div style={grid(2)}>{t.conclusion.collapseItems.map(([l,v],i)=><p key={i} style={{fontSize:11,marginBottom:2}}>• {l}: <span style={{color:wineLight}}>{v}</span></p>)}</div>
+            <div style={{background:parchment,borderRadius:2,padding:14,margin:"14px 0"}}><p style={{color:ink,fontWeight:600,marginBottom:8}}>{t.conclusion.collapseSummaryTitle}</p>
+              <div style={grid(2)}>{t.conclusion.collapseItems.map(([l,v],i)=><p key={i} style={{fontSize:11,marginBottom:2}}>• {l}: <span style={{color:crimsonLight}}>{v}</span></p>)}</div>
             </div>
-            <div style={{...sty.alert("green"),margin:"14px 0"}}><p style={{color:"#6aaa6a",fontWeight:600,marginBottom:8}}>{t.conclusion.traditionTitle}</p>
-              <div style={grid(2)}>{t.conclusion.traditionItems.map(([l,v],i)=><p key={i} style={{fontSize:11,marginBottom:2}}>• {l}: <span style={{color:"#6aaa6a"}}>{v}</span></p>)}</div>
+            <div style={{...sty.alert("green"),margin:"14px 0"}}><p style={{color:olive,fontWeight:600,marginBottom:8}}>{t.conclusion.traditionTitle}</p>
+              <div style={grid(2)}>{t.conclusion.traditionItems.map(([l,v],i)=><p key={i} style={{fontSize:11,marginBottom:2}}>• {l}: <span style={{color:olive}}>{v}</span></p>)}</div>
             </div>
 
             <div style={{borderTop:`1px solid ${borderC}`,borderBottom:`1px solid ${borderC}`,padding:"20px 0",margin:"20px 0"}}>
-              <p style={{color:cream,fontWeight:700,fontSize:16,fontFamily:"Georgia,serif",marginBottom:12}}>{t.conclusion.stateTitle}</p>
+              <p style={{color:ink,fontWeight:700,fontSize:16,fontFamily:"'Cinzel',serif",marginBottom:12}}>{t.conclusion.stateTitle}</p>
               <p style={{marginBottom:12}}>{t.conclusion.stateIntro}</p>
               <p style={{marginBottom:12}}>{t.conclusion.stateQuestion}</p>
-              <div style={{background:parchment,borderRadius:6,padding:14,margin:"14px 0"}}>
-                <p style={{color:cream,fontWeight:600,fontSize:12,marginBottom:8}}>{t.conclusion.pastoralTitle}</p>
+              <div style={{background:parchment,borderRadius:2,padding:14,margin:"14px 0"}}>
+                <p style={{color:ink,fontWeight:600,fontSize:12,marginBottom:8}}>{t.conclusion.pastoralTitle}</p>
                 {t.conclusion.pastoralPoints.map((pt,i)=>(
-                  <p key={i} style={{fontSize:12,marginBottom:6}}>• <span style={{color:cream,fontWeight:600}}>{pt.bold}</span> {pt.text}</p>
+                  <p key={i} style={{fontSize:12,marginBottom:6}}>• <span style={{color:ink,fontWeight:600}}>{pt.bold}</span> {pt.text}</p>
                 ))}
               </div>
               <p style={{marginBottom:12}}>{t.conclusion.lefebvreText}</p>
@@ -622,59 +622,59 @@ export default function App(){
               <p style={{marginBottom:12}}>{t.conclusion.athanasiusText}</p>
               <div style={{...sty.alert("gold"),margin:"14px 0"}}>
                 <p style={{color:goldLight,fontWeight:700,fontSize:13,marginBottom:8}}>{t.conclusion.verdictTitle}</p>
-                <p style={{color:"#c4b89a",fontSize:13,lineHeight:1.8}}>{t.conclusion.verdictText1}</p>
-                <p style={{color:"#c4b89a",fontSize:13,lineHeight:1.8,marginTop:8}}>{t.conclusion.verdictText2}</p>
-                <p style={{color:"#c4b89a",fontSize:13,lineHeight:1.8,marginTop:8}}>{t.conclusion.verdictText3}</p>
+                <p style={{color:sepia,fontSize:13,lineHeight:1.8}}>{t.conclusion.verdictText1}</p>
+                <p style={{color:sepia,fontSize:13,lineHeight:1.8,marginTop:8}}>{t.conclusion.verdictText2}</p>
+                <p style={{color:sepia,fontSize:13,lineHeight:1.8,marginTop:8}}>{t.conclusion.verdictText3}</p>
               </div>
               <p>{t.conclusion.finalText}</p>
             </div>
           </div>
         </Card>
-        <div style={{background:parchment,borderRadius:6,padding:12}}><p style={{color:"#6b6052",fontSize:10}}><span style={{color:"#8a7d68",fontWeight:600}}>{t.conclusion.sourcesLabel}</span> {t.conclusion.sourcesText}</p></div>
+        <div style={{background:parchment,borderRadius:2,padding:12}}><p style={{color:sepiaLight,fontSize:10}}><span style={{color:sepia,fontWeight:600}}>{t.conclusion.sourcesLabel}</span> {t.conclusion.sourcesText}</p></div>
       </>}
 
       {/* ══════════ AI ANALYSIS ══════════ */}
       {sec==="ai"&&<>
         <div style={sty.alert("blue")}>
-          <p style={{color:"#6b8cae",fontWeight:700,fontSize:13,marginBottom:6}}>{t.ai.transparencyTitle}</p>
-          <p style={{color:"#c4b89a",fontSize:12,lineHeight:1.7}}>{t.ai.transparencyText}</p>
+          <p style={{color:ultramarine,fontWeight:700,fontSize:13,marginBottom:6}}>{t.ai.transparencyTitle}</p>
+          <p className="drop-cap" style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.ai.transparencyText}</p>
         </div>
 
         <Card>
-          <H2 color="#6b8cae">{t.ai.analysisH2}</H2>
+          <H2 color={ultramarine}>{t.ai.analysisH2}</H2>
           <div style={{display:"flex",flexDirection:"column",gap:16,marginTop:8}}>
             {t.ai.analysisPoints.map((pt,i)=>(
               <div key={i}>
-                <h3 style={{color:cream,fontWeight:600,fontSize:13,marginBottom:4}}>{pt.title}</h3>
-                <p style={{color:"#c4b89a",fontSize:12,lineHeight:1.7}}>{pt.text}</p>
+                <h3 style={{color:ink,fontWeight:600,fontSize:13,marginBottom:4}}>{pt.title}</h3>
+                <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{pt.text}</p>
               </div>
             ))}
           </div>
         </Card>
 
-        <div style={{background:"linear-gradient(135deg, rgba(60,90,140,0.1) 0%, #1a1814 100%)",borderRadius:8,padding:24,border:"1px solid rgba(60,90,140,0.25)"}}>
-          <h3 style={{color:cream,fontWeight:700,fontSize:18,marginBottom:12}}>{t.ai.soulTitle}</h3>
-          <p style={{color:"#6b8cae",fontSize:12,fontStyle:"italic",lineHeight:1.7,marginBottom:12}}>{t.ai.soulQuestion}</p>
-          <p style={{color:cream,fontWeight:600,fontSize:13,marginBottom:12}}>{t.ai.soulAnswer}{t.ai.soulAnswerHighlight && <span style={{color:goldLight,fontWeight:700}}> {t.ai.soulAnswerHighlight}</span>}</p>
-          <div style={{background:"rgba(15,14,11,0.5)",borderRadius:6,padding:16,display:"flex",flexDirection:"column",gap:12}}>
+        <div style={{background:`linear-gradient(135deg, rgba(30,58,95,0.06) 0%, ${parchmentDark} 100%)`,borderRadius:2,padding:24,border:"1px solid rgba(30,58,95,0.2)"}}>
+          <h3 style={{color:ink,fontWeight:700,fontSize:18,marginBottom:12,fontFamily:"'Cinzel',serif"}}>{t.ai.soulTitle}</h3>
+          <p style={{color:ultramarine,fontSize:12,fontStyle:"italic",lineHeight:1.7,marginBottom:12}}>{t.ai.soulQuestion}</p>
+          <p style={{color:ink,fontWeight:600,fontSize:13,marginBottom:12}}>{t.ai.soulAnswer}{t.ai.soulAnswerHighlight && <span style={{color:goldLight,fontWeight:700}}> {t.ai.soulAnswerHighlight}</span>}</p>
+          <div style={{background:"rgba(232,220,200,0.5)",borderRadius:2,padding:16,display:"flex",flexDirection:"column",gap:12}}>
             {t.ai.soulPoints.map((point,i)=>(
-              <p key={i} style={{color:"#c4b89a",fontSize:12,lineHeight:1.6}}>
-                <span style={{color:"#6b8cae",fontWeight:700}}>{i+1}.</span> {point}
+              <p key={i} style={{color:sepia,fontSize:12,lineHeight:1.6}}>
+                <span style={{color:ultramarine,fontWeight:700}}>{i+1}.</span> {point}
               </p>
             ))}
           </div>
         </div>
 
         <Card>
-          <p style={{color:"#c4b89a",fontSize:12,lineHeight:1.7}}>{t.ai.nuanceText}</p>
+          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.ai.nuanceText}</p>
         </Card>
 
         <Card>
-          <p style={{color:"#a89a80",fontSize:12,fontStyle:"italic",lineHeight:1.7}}>{t.ai.ironyText}</p>
+          <p style={{color:sepiaLight,fontSize:12,fontStyle:"italic",lineHeight:1.7}}>{t.ai.ironyText}</p>
         </Card>
 
-        <div style={{background:parchment,borderRadius:6,padding:10,textAlign:"center"}}>
-          <p style={{color:"#6b6052",fontSize:10}}>{t.ai.footerDisclaimer}</p>
+        <div style={{background:parchment,borderRadius:2,padding:10,textAlign:"center"}}>
+          <p style={{color:sepiaLight,fontSize:10}}>{t.ai.footerDisclaimer}</p>
         </div>
       </>}
 
