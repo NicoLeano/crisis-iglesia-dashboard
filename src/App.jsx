@@ -45,7 +45,7 @@ const TT = ({active,payload,label}) => {
 };
 
 const sourceLinks = {
-  "Pew 2019": "https://www.pewresearch.org/religion/2019/08/05/beliefs-and-practices/",
+  "Pew 2019": "https://www.pewresearch.org/short-reads/2019/08/05/transubstantiation-eucharist-u-s-catholics/",
   "CARA": "https://cara.georgetown.edu/frequently-requested-church-statistics/",
 };
 const linkifySub = (s) => {
