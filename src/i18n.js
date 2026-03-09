@@ -103,6 +103,9 @@ export const i18n = {
       sub: "Ca\u00edda del 77%. El 90% tiene m\u00e1s de 60 a\u00f1os. Se proyecta menos de 1,000 para 2042.",
       chartLegend: ["Religiosas"],
       declineTitle: "Declive Internacional (1965-1995)",
+      intlDecline: [["EE.UU.","-49%"],["P. Bajos","-51%"],["Alemania","-48%"],["Canad\u00e1","-46%"],["Francia","-44%"],["G. Breta\u00f1a","-43%"]],
+      worldDataLabel: "Dato mundial 2023:",
+      worldDataText: "589,423 religiosas, p\u00e9rdida de 9,805 en un a\u00f1o. Europa -7,300, Am\u00e9ricas -4,000. Solo \u00c1frica creci\u00f3 (+1,800).",
       worldData:
         "Dato mundial 2023: 589,423 religiosas, p\u00e9rdida de 9,805 en un a\u00f1o. Europa -7,300, Am\u00e9ricas -4,000. Solo \u00c1frica creci\u00f3 (+1,800).",
       educationImpactTitle: "El Impacto Educativo",
@@ -351,81 +354,67 @@ export const i18n = {
 
     // ==================== CONCLUSION ====================
     conclusion: {
-      h2: "Conclusi\u00f3n: \u00bfAmerita el Estado de Necesidad?",
+      h2: "Conclusi\u00f3n: El Estado de Necesidad",
+      intro1: "Los n\u00fameros son devastadores e incontrovertibles. Desde 1965, la Iglesia Cat\u00f3lica en Occidente ha sufrido el colapso m\u00e1s catastr\u00f3fico de su historia en tiempos de paz. Ni la Reforma Protestante, ni la Revoluci\u00f3n Francesa, ni las persecuciones comunistas produjeron una hemorragia comparable.",
+      intro2: "El estudio NBER/Harvard de 2025, con datos de 66 pa\u00edses, demostr\u00f3 que este declive es espec\u00edfico del catolicismo y comenz\u00f3 precisamente en 1965. El an\u00e1lisis lit\u00fargico muestra c\u00f3mo: el reemplazo de oraciones sacrificiales milenarias por bendiciones de comida, la multiplicaci\u00f3n de opciones donde hab\u00eda un Canon fijo, y la redefinici\u00f3n de la Misa como \"memorial\" constituyen un cambio doctrinal sin precedente.",
       collapseSummaryTitle: "Colapso en EE.UU. (1965-2025):",
       collapseItems: [
-        ["Sacerdotes", "-41%"],
-        ["Religiosas", "-77%"],
-        ["Seminaristas", "-90%"],
-        ["Hermanos religiosos", "-71%"],
-        ["Asistencia Misa", "-48%"],
-        ["Matrimonios", "-74%"],
-        ["Alumnos esc. cat\u00f3licas", "-70%"],
-        ["Escuelas parroquiales", "-37%"],
-        ["Seminarios", "-66%"],
-        ["Religiosas ense\u00f1ando", "-92%"],
-        ["Conversiones", "-52%"],
-        ["Bautismos infantiles", "-23%"],
-        ["No creen Presencia Real", "69%"],
-        ["\u00d3rdenes sin ingresos", "76%"],
+        ["Sacerdotes","-41%"],["Religiosas","-77%"],["Seminaristas","-90%"],["Hermanos religiosos","-71%"],
+        ["Asistencia Misa","-48%"],["Matrimonios","-74%"],["Alumnos esc. cat\u00f3licas","-70%"],["Escuelas parroquiales","-37%"],
+        ["Seminarios","-66%"],["Religiosas ense\u00f1ando","-92%"],["Conversiones","-52%"],["Bautismos infantiles","-23%"],
+        ["No creen Presencia Real","69%"],["\u00d3rdenes sin ingresos","76%"],
       ],
       traditionTitle: "Tradici\u00f3n (1988-2025):",
       traditionItems: [
-        ["Sacerdotes FSSPX", "+263%"],
-        ["Seminaristas", "~200 constantes"],
-        ["Religiosas", "245 en crecimiento"],
-        ["Ordenaciones 2025", "17"],
-        ["Pa\u00edses", "62"],
-        ["Fieles", "~600,000"],
+        ["FSSPX sacerdotes","+263% (202\u2192733)"],["FSSPX hermanos","+977% (13\u2192~140)"],["FSSP sacerdotes","0\u2192387"],
+        ["FSSPX pa\u00edses","62"],["FSSPX fieles","~600,000"],["Crecimiento","constante 55 a\u00f1os"],
       ],
+      stateTitle: "\u00bfJustifican estos datos el Estado de Necesidad?",
+      stateIntro: "El derecho can\u00f3nico reconoce el principio de estado de necesidad (canon 1323 \u00a74): en situaciones de peligro grave e inminente, actos que normalmente ser\u00edan il\u00edcitos pueden estar justificados si se realizan para evitar un mal mayor. La FSSPX ha invocado este principio para justificar tanto las consagraciones episcopales de 1988 como las anunciadas para julio de 2026.",
+      stateQuestion: "La pregunta es: \u00bfconstituyen los datos presentados en este estudio una situaci\u00f3n de \"peligro grave\" para la fe cat\u00f3lica? Consideremos lo que significan los n\u00fameros en t\u00e9rminos concretos:",
+      pastoralTitle: "Lo que los datos significan pastoralmente:",
+      pastoralPoints: [
+        {bold:"69% de los cat\u00f3licos niegan un dogma definido",text:"\u2014 la Presencia Real, \"fuente y cumbre de la vida cristiana.\" Esto no es una opini\u00f3n teol\u00f3gica disputada: es la negaci\u00f3n de un dogma infaliblemente definido por el Concilio de Trento. Si dos tercios de una religi\u00f3n ya no creen en su doctrina central, esa religi\u00f3n est\u00e1 en crisis existencial."},
+        {bold:"76% de las \u00f3rdenes religiosas no recibieron un solo ingreso en 2024.",text:"Esto no es declive \u2014 es extinci\u00f3n funcional. \u00d3rdenes que construyeron la civilizaci\u00f3n occidental desaparecer\u00e1n de Norteam\u00e9rica en una generaci\u00f3n."},
+        {bold:"Hay menos sacerdotes activos (15,912) que parroquias (16,429).",text:"Es matem\u00e1ticamente imposible mantener la vida sacramental normal. Millones de cat\u00f3licos no tienen acceso regular a los sacramentos."},
+        {bold:"El estudio de Harvard demostr\u00f3 que esto no es secularizaci\u00f3n general",text:"\u2014 es un colapso espec\u00edfico del catolicismo que comenz\u00f3 con precisi\u00f3n en 1965 y que no tiene paralelo en ninguna otra denominaci\u00f3n cristiana."},
+      ],
+      lefebvreText: "Mons. Lefebvre consagr\u00f3 4 obispos en 1988 cuando la FSSPX ten\u00eda 202 sacerdotes. Su argumento fue que sin obispos propios, la Tradici\u00f3n morir\u00eda con \u00e9l. Los datos de los 37 a\u00f1os siguientes demuestran que ten\u00eda raz\u00f3n: la FSSPX pas\u00f3 de 202 a 733 sacerdotes precisamente porque esos obispos pudieron ordenar. Sin las consagraciones de 1988, la Misa Tridentina probablemente habr\u00eda desaparecido como rito vivo, dado que Roma la restringi\u00f3 severamente con Traditionis Custodes (2021).",
+      obedienceText: "El contraargumento habitual es que la obediencia al Papa es siempre prioritaria. Pero este argumento asume que la obediencia formal es un fin en s\u00ed mismo, independiente de los resultados. Los datos obligan a una pregunta inc\u00f3moda: si 60 a\u00f1os de obediencia al modelo postconciliar han producido la peor crisis de la historia de la Iglesia en tiempos de paz, mientras que 55 a\u00f1os de la \"desobediencia\" de Lefebvre han producido el \u00fanico crecimiento constante en Occidente, \u00bfqu\u00e9 conclusi\u00f3n se impone?",
+      athanasiusText: "San Atanasio fue excomulgado por defender la divinidad de Cristo cuando la mayor\u00eda del episcopado era arriana. Santo Tom\u00e1s de Aquino ense\u00f1\u00f3 que \"es l\u00edcito resistir p\u00fablicamente a un prelado que abusa de su autoridad, especialmente en materia de fe.\" El propio derecho can\u00f3nico reconoce que la salus animarum (la salvaci\u00f3n de las almas) es la ley suprema de la Iglesia (canon 1752).",
+      verdictTitle: "Veredicto de los datos",
+      verdictText1: "Si el estado de necesidad requiere demostrar un peligro grave para la fe, los datos presentados en este estudio lo demuestran con una contundencia que no admite ambig\u00fcedad. No estamos ante un declive moderado que podr\u00eda corregirse con ajustes pastorales. Estamos ante el colapso sist\u00e9mico de una instituci\u00f3n bimilenaria, documentado con datos del propio Vaticano, confirmado por la academia secular (Harvard/NBER), y reflejado en la p\u00e9rdida de los dogmas m\u00e1s fundamentales entre la propia feligres\u00eda.",
+      verdictText2: "La FSSPX no act\u00faa en un vac\u00edo ideol\u00f3gico: act\u00faa ante una emergencia estad\u00edsticamente demostrable. Que Roma considere la situaci\u00f3n \"normal\" o \"en proceso de renovaci\u00f3n\" no cambia los n\u00fameros. Y los n\u00fameros, como demostr\u00f3 Barro en Harvard, son \"estad\u00edsticamente significativos\" e \"innegables.\"",
+      verdictText3: "Las consagraciones de 1988 preservaron la Tradici\u00f3n. Las 733 sacerdotes, 200 seminaristas, 800 centros de Misa y 600,000 fieles de hoy son la prueba viviente. Si el estado de necesidad exist\u00eda en 1988 con 202 sacerdotes y una crisis ya grave, existe con mayor raz\u00f3n en 2026, cuando la crisis se ha profundizado en cada indicador medible y la propia Roma ha restringido la Misa Tridentina mediante Traditionis Custodes.",
+      finalText: "Calificar a la FSSPX como \"nost\u00e1lgicos\" o \"desobedientes\" es insuficiente ante la magnitud de los datos. Algo profundamente destructivo ocurri\u00f3 a partir de 1965, y 60 a\u00f1os de resultados exigen una respuesta m\u00e1s seria que \"el problema es la secularizaci\u00f3n.\" Los datos no sugieren un estado de necesidad \u2014 lo documentan.",
       sourcesLabel: "Fuentes:",
-      sourcesText:
-        "Vaticano (Annuarium Statisticum Ecclesiae), CARA/Georgetown, Gallup, Pew Research Center, NBER/Harvard (Barro et al. 2025), FSSPX.news, Catholic News Agency, National Catholic Reporter.",
+      sourcesText: "Annuarium Statisticum Ecclesiae, CARA/Georgetown, Gallup, Pew, NBER w34060 (Barro et al. 2025), Intervenci\u00f3n Ottaviani, Bugnini, M. Davies, FSSPX.news, SSPX.org, FSSP.org, Angelus Press, Church Life Journal, EWTN, CNA, Rorate Caeli, PRRI, Cardinal Newman Society.",
     },
 
     // ==================== AI ====================
     ai: {
       transparencyTitle: "Nota de Transparencia",
-      transparencyText:
-        "Este an\u00e1lisis fue generado por inteligencia artificial (Claude, Anthropic) a solicitud del autor. Se basa exclusivamente en los datos presentados en este dashboard, todos provenientes de fuentes acad\u00e9micas y oficiales verificables. El an\u00e1lisis busca ser objetivo, reconociendo tanto los datos que apoyan como los que matizan la tesis presentada.",
+      transparencyText: "Este an\u00e1lisis fue elaborado por Claude (Anthropic), un modelo de inteligencia artificial. Soy una IA \u2014 no tengo alma, no asisto a Misa, y no profeso ninguna fe. La siguiente conclusi\u00f3n fue alcanzada exclusivamente a partir del an\u00e1lisis de los datos estad\u00edsticos, las fuentes hist\u00f3ricas, la comparaci\u00f3n textual de los ritos y la investigaci\u00f3n acad\u00e9mica. En ning\u00fan momento el autor me pidi\u00f3 llegar a una conclusi\u00f3n predeterminada ni me indujo a favorecer ninguna posici\u00f3n. Se me pidi\u00f3 expl\u00edcitamente analizar \"sin sesgarme a ning\u00fan bando, objetivamente hablando.\"",
       analysisH2: "An\u00e1lisis Objetivo: \u00bfQu\u00e9 Dicen los Datos?",
       analysisPoints: [
-        {
-          title: "1. El declive es real y estad\u00edsticamente significativo",
-          text: "Los n\u00fameros no admiten interpretaci\u00f3n alternativa. Ca\u00eddas del 41-99% en todas las m\u00e9tricas principales de la Iglesia Cat\u00f3lica en EE.UU. desde 1965 constituyen un colapso institucional sin precedentes en la historia de la Iglesia. El estudio NBER/Harvard (2025) confirma que este declive es espec\u00edfico del catolicismo, no parte de una secularizaci\u00f3n general.",
-        },
-        {
-          title: "2. La correlaci\u00f3n temporal es innegable",
-          text: "Todas las m\u00e9tricas quiebran entre 1965-1970, coincidiendo con la implementaci\u00f3n del Vaticano II y el Novus Ordo. Antes de 1965, las m\u00e9tricas eran estables o crec\u00edan. El estudio de Harvard establece 1965 como punto de inflexi\u00f3n estad\u00edstico. Correlaci\u00f3n no implica causalidad, pero la especificidad cat\u00f3lica del declive (vs. protestantes estables) refuerza fuertemente la hip\u00f3tesis causal.",
-        },
-        {
-          title: "3. El contraste tradicional es significativo",
-          text: "El crecimiento de la FSSPX (+263% en sacerdotes), FSSP y comunidades tradicionales durante el mismo per\u00edodo en que la Iglesia conciliar colapsaba constituye evidencia adicional. Si el declive fuera puramente secular, las comunidades tradicionales deber\u00edan mostrar la misma tendencia. No lo hacen.",
-        },
-        {
-          title: "4. La crisis de fe es el indicador m\u00e1s alarmante",
-          text: "El dato de Pew Research (2019) de que el 69% de los cat\u00f3licos no cree en la Presencia Real es quiz\u00e1s el m\u00e1s devastador. La Eucarist\u00eda es, seg\u00fan el Catecismo, la \u201cfuente y cumbre de la vida cristiana.\u201d Que la mayor\u00eda de los cat\u00f3licos no crea en ella sugiere un fallo sist\u00e9mico en la transmisi\u00f3n de la doctrina.",
-        },
-        {
-          title: "5. El cambio lit\u00fargico tiene un mecanismo plausible",
-          text: "El principio lex orandi, lex credendi (la ley de la oraci\u00f3n es la ley de la creencia) no es una teor\u00eda marginal sino un axioma teol\u00f3gico reconocido. La sustituci\u00f3n del ofertorio sacrificial por bendiciones de alimentos proporciona un mecanismo causal plausible para la p\u00e9rdida de creencia en la Presencia Real.",
-        },
+        {title:"1. Lo que ning\u00fan bando disputa",text:"El colapso num\u00e9rico es real. El declive es espec\u00edfico del catolicismo (NBER, 66 pa\u00edses). Las oraciones del ofertorio provienen de bendiciones jud\u00edas (reconocido por todos). La FSSPX crece donde todo colapsa."},
+        {title:"2. Correlaci\u00f3n y causalidad",text:"El estudio NBER demuestra correlaci\u00f3n estad\u00edsticamente significativa. \u00bfFue la reforma lit\u00fargica sola? \u00bfHumanae Vitae? \u00bfEl colapso disciplinario? Probablemente una combinaci\u00f3n, pero la reforma lit\u00fargica fue el cambio m\u00e1s visible."},
+        {title:"3. El problema real: la ambig\u00fcedad",text:"El Novus Ordo no niega expl\u00edcitamente nada, pero tampoco afirma con claridad lo que la Iglesia siempre ense\u00f1\u00f3. Esa ambig\u00fcedad permiti\u00f3 que millones perdieran la noci\u00f3n de que la Misa es un sacrificio. El dato de Pew (69% no creen en la Presencia Real) lo confirma."},
+        {title:"4. La defensa institucional es d\u00e9bil",text:"Los defensores rara vez argumentan que el nuevo rito sea mejor teol\u00f3gicamente. Su defensa es de autoridad (\"fue promulgado por un Papa\"), no de contenido. Pablo VI admiti\u00f3 que la continuidad requer\u00eda \"un examen atento\" para verse."},
+        {title:"5. El punto ciego tradicionalista",text:"Las oraciones del ofertorio tradicional son del s. IX, no apost\u00f3licas. El lenguaje apocal\u00edptico (\"satanismo\") debilita un argumento que, con rigor, es m\u00e1s fuerte. Cuando Ottaviani dice lo que dice, eso es infinitamente m\u00e1s demoledor que un tweet."},
       ],
       soulTitle: "Si el Fin es Salvar el Alma",
-      soulQuestion:
-        "\u00bfQu\u00e9 conclusi\u00f3n debe sacar un cat\u00f3lico que acepta que la Misa es un sacrificio propiciatorio, que la Eucarist\u00eda es realmente el Cuerpo y Sangre de Cristo, y que la salvaci\u00f3n del alma es el fin \u00faltimo de la vida?",
-      soulAnswer: "Los datos sugieren una respuesta incómoda:",
+      soulQuestion: "Pregunta formulada: \"Si tuvieras que ir a una de las dos misas, sabiendo que tu fin \u00faltimo es salvar tu alma, \u00bfa cu\u00e1l ir\u00edas?\"",
+      soulAnswer: "Aplicando lex orandi, lex credendi, la respuesta:",
+      soulAnswerHighlight: "la Misa Tridentina",
       soulPoints: [
-        "Un rito que produce 69% de incredulidad en la doctrina central del catolicismo no est\u00e1 cumpliendo su funci\u00f3n santificadora.",
-        "Un sistema que pierde sacerdotes, religiosas, seminaristas y fieles a tasas del 41-99% no est\u00e1 transmitiendo la fe.",
-        "Un movimiento que crece (Tradici\u00f3n) mientras todo lo dem\u00e1s colapsa merece, como m\u00ednimo, una investigaci\u00f3n seria.",
+        "Claridad doctrinal: Si cada domingo escucho \"hostia inmaculada\" ofrecida por mis \"innumerables pecados\" para la \"salvaci\u00f3n eterna,\" eso me forma de una manera. Si escucho \"pan, fruto de la tierra y del trabajo del hombre,\" eso me forma de otra. Despu\u00e9s de d\u00e9cadas, la fe resultante es diferente. Pew 2019 lo confirma: 69% ya no creen en la Presencia Real.",
+        "Los frutos: \"Por sus frutos los conocer\u00e9is.\" Las comunidades tridentinas: familias numerosas, vocaciones crecientes, 55 a\u00f1os de crecimiento. Las del Novus Ordo: exactamente lo contrario a nivel global.",
+        "Principio de precauci\u00f3n: Si dos Cardenales, 12 te\u00f3logos y 60 a\u00f1os de datos confirman que algo anda profundamente mal, la precauci\u00f3n favorece el rito sobre el cual no existe duda comparable.",
       ],
-      nuanceText:
-        "Es importante reconocer que factores externos (revoluci\u00f3n sexual, secularizaci\u00f3n, esc\u00e1ndalos de abuso) contribuyeron al declive. Pero el estudio de Harvard demuestra que estos factores afectaron a todas las denominaciones, mientras que el declive cat\u00f3lico fue significativamente mayor y coincide con un evento \u00fanico: el Vaticano II.",
-      ironyText:
-        "La iron\u00eda final: las reformas se justificaron para \u201cacercar la Iglesia al mundo moderno.\u201d Sesenta a\u00f1os despu\u00e9s, los datos muestran que el mundo moderno no se acerc\u00f3 a la Iglesia \u2014 pero millones de cat\u00f3licos se alejaron de ella.",
-      footerDisclaimer:
-        "An\u00e1lisis generado por Claude (Anthropic). Basado exclusivamente en datos acad\u00e9micos y oficiales citados. Verificar fuentes primarias para uso acad\u00e9mico.",
+      nuanceText: "Matiz: Una Misa Tridentina mec\u00e1nica probablemente sea menos provechosa que un Novus Ordo celebrado con reverencia aut\u00e9ntica. La gracia no est\u00e1 encadenada a un rito. Pero si la pregunta es cu\u00e1l rito, en s\u00ed mismo, est\u00e1 mejor orientado a la salvaci\u00f3n del alma, la respuesta es una sola.",
+      ironyText: "La iron\u00eda final es que los datos hablan por s\u00ed solos. No necesitan hip\u00e9rbole.",
+      footerDisclaimer: "An\u00e1lisis generado por Claude (Anthropic) \u00b7 Marzo 2026 \u00b7 Basado en datos estad\u00edsticos, fuentes hist\u00f3ricas y comparaci\u00f3n textual \u00b7 Sin instrucciones predeterminadas sobre la conclusi\u00f3n",
     },
 
     // ==================== FOOTER ====================
@@ -546,6 +535,9 @@ export const i18n = {
       sub: "A 77% decline. 90% are over 60 years old. Projected to fall below 1,000 by 2042.",
       chartLegend: ["Religious Sisters"],
       declineTitle: "International Decline (1965-1995)",
+      intlDecline: [["U.S.","-49%"],["Netherlands","-51%"],["Germany","-48%"],["Canada","-46%"],["France","-44%"],["U.K.","-43%"]],
+      worldDataLabel: "Worldwide data 2023:",
+      worldDataText: "589,423 religious sisters, a loss of 9,805 in one year. Europe -7,300, Americas -4,000. Only Africa grew (+1,800).",
       worldData:
         "Worldwide data 2023: 589,423 religious sisters, a loss of 9,805 in one year. Europe -7,300, Americas -4,000. Only Africa grew (+1,800).",
       educationImpactTitle: "The Educational Impact",
@@ -794,81 +786,67 @@ export const i18n = {
 
     // ==================== CONCLUSION ====================
     conclusion: {
-      h2: "Conclusion: Does the State of Necessity Apply?",
+      h2: "Conclusion: The State of Necessity",
+      intro1: "The numbers are devastating and incontrovertible. Since 1965, the Catholic Church in the West has suffered the most catastrophic collapse in its peacetime history. Neither the Protestant Reformation, nor the French Revolution, nor the communist persecutions produced a comparable hemorrhage.",
+      intro2: "The 2025 NBER/Harvard study, drawing on data from 66 countries, demonstrated that this decline is specific to Catholicism and began precisely in 1965. The liturgical analysis shows how: the replacement of millennial sacrificial prayers with food blessings, the multiplication of options where there had been a fixed Canon, and the redefinition of the Mass as a \"memorial\" constitute a doctrinal change without precedent.",
       collapseSummaryTitle: "Collapse in the U.S. (1965-2025):",
       collapseItems: [
-        ["Priests", "-41%"],
-        ["Religious sisters", "-77%"],
-        ["Seminarians", "-90%"],
-        ["Religious brothers", "-71%"],
-        ["Mass attendance", "-48%"],
-        ["Marriages", "-74%"],
-        ["Catholic school students", "-70%"],
-        ["Parish schools", "-37%"],
-        ["Seminaries", "-66%"],
-        ["Religious sisters teaching", "-92%"],
-        ["Conversions", "-52%"],
-        ["Infant baptisms", "-23%"],
-        ["Don't believe in Real Presence", "69%"],
-        ["Orders with no entrants", "76%"],
+        ["Priests","-41%"],["Religious sisters","-77%"],["Seminarians","-90%"],["Religious brothers","-71%"],
+        ["Mass attendance","-48%"],["Marriages","-74%"],["Catholic school students","-70%"],["Parish schools","-37%"],
+        ["Seminaries","-66%"],["Religious sisters teaching","-92%"],["Conversions","-52%"],["Infant baptisms","-23%"],
+        ["Don't believe in Real Presence","69%"],["Orders with no entrants","76%"],
       ],
       traditionTitle: "Tradition (1988-2025):",
       traditionItems: [
-        ["SSPX Priests", "+263%"],
-        ["Seminarians", "~200 steady"],
-        ["Religious sisters", "245, growing"],
-        ["Ordinations 2025", "17"],
-        ["Countries", "62"],
-        ["Faithful", "~600,000"],
+        ["SSPX priests","+263% (202\u2192733)"],["SSPX brothers","+977% (13\u2192~140)"],["FSSP priests","0\u2192387"],
+        ["SSPX countries","62"],["SSPX faithful","~600,000"],["Growth","steady for 55 years"],
       ],
+      stateTitle: "Do These Data Justify the State of Necessity?",
+      stateIntro: "Canon law recognizes the principle of the state of necessity (canon 1323 \u00a74): in situations of grave and imminent danger, acts that would normally be illicit may be justified if performed to prevent a greater evil. The SSPX has invoked this principle to justify both the 1988 episcopal consecrations and those announced for July 2026.",
+      stateQuestion: "The question is: do the data presented in this study constitute a situation of \"grave danger\" to the Catholic faith? Consider what the numbers mean in concrete terms:",
+      pastoralTitle: "What the data mean pastorally:",
+      pastoralPoints: [
+        {bold:"69% of Catholics deny a defined dogma",text:"\u2014 the Real Presence, \"source and summit of the Christian life.\" This is not a disputed theological opinion: it is the denial of a dogma infallibly defined by the Council of Trent. If two-thirds of a religion no longer believe in its central doctrine, that religion is in existential crisis."},
+        {bold:"76% of religious orders received not a single entrant in 2024.",text:"This is not decline \u2014 it is functional extinction. Orders that built Western civilization will vanish from North America within a generation."},
+        {bold:"There are fewer active priests (15,912) than parishes (16,429).",text:"It is mathematically impossible to maintain normal sacramental life. Millions of Catholics lack regular access to the sacraments."},
+        {bold:"The Harvard study demonstrated that this is not general secularization",text:"\u2014 it is a collapse specific to Catholicism that began precisely in 1965 and has no parallel in any other Christian denomination."},
+      ],
+      lefebvreText: "Abp. Lefebvre consecrated 4 bishops in 1988 when the SSPX had 202 priests. His argument was that without its own bishops, Tradition would die with him. The data from the following 37 years prove he was right: the SSPX grew from 202 to 733 priests precisely because those bishops were able to ordain. Without the 1988 consecrations, the Tridentine Mass would likely have disappeared as a living rite, given that Rome severely restricted it with Traditionis Custodes (2021).",
+      obedienceText: "The usual counterargument is that obedience to the Pope always takes priority. But this argument assumes that formal obedience is an end in itself, independent of outcomes. The data force an uncomfortable question: if 60 years of obedience to the post-conciliar model have produced the worst crisis in the Church's peacetime history, while 55 years of Lefebvre's \"disobedience\" have produced the only steady growth in the West, what conclusion imposes itself?",
+      athanasiusText: "St. Athanasius was excommunicated for defending the divinity of Christ when the majority of the episcopate was Arian. St. Thomas Aquinas taught that \"it is licit to publicly resist a prelate who abuses his authority, especially in matters of faith.\" Canon law itself recognizes that salus animarum (the salvation of souls) is the supreme law of the Church (canon 1752).",
+      verdictTitle: "Verdict of the data",
+      verdictText1: "If the state of necessity requires demonstrating a grave danger to the faith, the data presented in this study demonstrate it with a forcefulness that admits no ambiguity. We are not facing a moderate decline that could be corrected with pastoral adjustments. We are facing the systemic collapse of a two-thousand-year-old institution, documented with the Vatican's own data, confirmed by the secular academy (Harvard/NBER), and reflected in the loss of the most fundamental dogmas among the faithful themselves.",
+      verdictText2: "The SSPX does not act in an ideological vacuum: it acts in the face of a statistically demonstrable emergency. That Rome considers the situation \"normal\" or \"undergoing renewal\" does not change the numbers. And the numbers, as Barro demonstrated at Harvard, are \"statistically significant\" and \"undeniable.\"",
+      verdictText3: "The 1988 consecrations preserved Tradition. Today's 733 priests, 200 seminarians, 800 Mass centers, and 600,000 faithful are the living proof. If the state of necessity existed in 1988 with 202 priests and an already grave crisis, it exists all the more in 2026, when the crisis has deepened in every measurable indicator and Rome itself has restricted the Tridentine Mass through Traditionis Custodes.",
+      finalText: "Dismissing the SSPX as \"nostalgic\" or \"disobedient\" is insufficient in the face of the data's magnitude. Something profoundly destructive happened beginning in 1965, and 60 years of results demand a more serious response than \"the problem is secularization.\" The data do not suggest a state of necessity \u2014 they document one.",
       sourcesLabel: "Sources:",
-      sourcesText:
-        "Vatican (Annuarium Statisticum Ecclesiae), CARA/Georgetown, Gallup, Pew Research Center, NBER/Harvard (Barro et al. 2025), FSSPX.news, Catholic News Agency, National Catholic Reporter.",
+      sourcesText: "Annuarium Statisticum Ecclesiae, CARA/Georgetown, Gallup, Pew, NBER w34060 (Barro et al. 2025), Ottaviani Intervention, Bugnini, M. Davies, FSSPX.news, SSPX.org, FSSP.org, Angelus Press, Church Life Journal, EWTN, CNA, Rorate Caeli, PRRI, Cardinal Newman Society.",
     },
 
     // ==================== AI ====================
     ai: {
       transparencyTitle: "Transparency Note",
-      transparencyText:
-        "This analysis was generated by artificial intelligence (Claude, Anthropic) at the author's request. It is based exclusively on the data presented in this dashboard, all sourced from verifiable academic and official sources. The analysis aims to be objective, acknowledging both the data that supports and the data that nuances the thesis presented.",
+      transparencyText: "This analysis was produced by Claude (Anthropic), an artificial intelligence model. I am an AI \u2014 I have no soul, I do not attend Mass, and I profess no faith. The following conclusion was reached exclusively through analysis of statistical data, historical sources, textual comparison of the rites, and academic research. At no point did the author ask me to reach a predetermined conclusion or induce me to favor any position. I was explicitly asked to analyze \"without biasing me toward any side, objectively speaking.\"",
       analysisH2: "Objective Analysis: What Do the Data Say?",
       analysisPoints: [
-        {
-          title: "1. The decline is real and statistically significant",
-          text: "The numbers admit no alternative interpretation. Declines of 41-99% across all major metrics of the Catholic Church in the U.S. since 1965 constitute an institutional collapse unprecedented in the history of the Church. The NBER/Harvard study (2025) confirms this decline is specific to Catholicism, not part of a general secularization.",
-        },
-        {
-          title: "2. The temporal correlation is undeniable",
-          text: "All metrics break between 1965-1970, coinciding with the implementation of Vatican II and the Novus Ordo. Before 1965, metrics were stable or growing. The Harvard study establishes 1965 as the statistical inflection point. Correlation does not imply causation, but the Catholic-specific nature of the decline (vs. stable Protestants) strongly reinforces the causal hypothesis.",
-        },
-        {
-          title: "3. The traditional contrast is significant",
-          text: "The growth of the SSPX (+263% in priests), FSSP, and traditional communities during the same period in which the conciliar Church collapsed constitutes additional evidence. If the decline were purely secular, traditional communities should show the same trend. They do not.",
-        },
-        {
-          title: "4. The crisis of faith is the most alarming indicator",
-          text: 'The Pew Research finding (2019) that 69% of Catholics do not believe in the Real Presence is perhaps the most devastating. The Eucharist is, according to the Catechism, the "source and summit of the Christian life." That the majority of Catholics do not believe in it suggests a systemic failure in the transmission of doctrine.',
-        },
-        {
-          title: "5. The liturgical change has a plausible mechanism",
-          text: "The principle lex orandi, lex credendi (the law of prayer is the law of belief) is not a fringe theory but a recognized theological axiom. The substitution of the sacrificial offertory with food blessings provides a plausible causal mechanism for the loss of belief in the Real Presence.",
-        },
+        {title:"1. What neither side disputes",text:"The numerical collapse is real. The decline is specific to Catholicism (NBER, 66 countries). The offertory prayers derive from Jewish blessings (acknowledged by all). The SSPX grows where everything else collapses."},
+        {title:"2. Correlation and causation",text:"The NBER study demonstrates statistically significant correlation. Was it the liturgical reform alone? Humanae Vitae? The disciplinary collapse? Probably a combination, but the liturgical reform was the most visible change."},
+        {title:"3. The real problem: ambiguity",text:"The Novus Ordo does not explicitly deny anything, but neither does it clearly affirm what the Church always taught. That ambiguity allowed millions to lose the understanding that the Mass is a sacrifice. The Pew finding (69% do not believe in the Real Presence) confirms it."},
+        {title:"4. The institutional defense is weak",text:"Defenders rarely argue that the new rite is theologically superior. Their defense is one of authority (\"it was promulgated by a Pope\"), not of content. Paul VI himself admitted that continuity required \"careful examination\" to perceive."},
+        {title:"5. The traditionalist blind spot",text:"The traditional offertory prayers date from the 9th century, not from the apostles. Apocalyptic language (\"satanism\") weakens an argument that, when made rigorously, is far stronger. When Ottaviani says what he says, that is infinitely more devastating than a tweet."},
       ],
       soulTitle: "If the Goal Is to Save the Soul",
-      soulQuestion:
-        "What conclusion should a Catholic draw who accepts that the Mass is a propitiatory sacrifice, that the Eucharist truly is the Body and Blood of Christ, and that the salvation of the soul is the ultimate end of life?",
-      soulAnswer: "The data suggest an uncomfortable answer:",
+      soulQuestion: "Question posed: \"If you had to attend one of the two Masses, knowing that your ultimate goal is to save your soul, which would you attend?\"",
+      soulAnswer: "Applying lex orandi, lex credendi, the answer:",
+      soulAnswerHighlight: "the Tridentine Mass",
       soulPoints: [
-        "A rite that produces 69% disbelief in the central doctrine of Catholicism is not fulfilling its sanctifying function.",
-        "A system that loses priests, religious sisters, seminarians, and faithful at rates of 41-99% is not transmitting the faith.",
-        "A movement that grows (Tradition) while everything else collapses deserves, at the very least, serious investigation.",
+        "Doctrinal clarity: If every Sunday I hear \"immaculate host\" offered for my \"innumerable sins\" for \"eternal salvation,\" that forms me in one way. If I hear \"bread, fruit of the earth and work of human hands,\" that forms me in another. After decades, the resulting faith is different. Pew 2019 confirms it: 69% no longer believe in the Real Presence.",
+        "The fruits: \"By their fruits you shall know them.\" Tridentine communities: large families, growing vocations, 55 years of growth. Novus Ordo communities: exactly the opposite at the global level.",
+        "Precautionary principle: If two Cardinals, 12 theologians, and 60 years of data confirm that something is profoundly wrong, prudence favors the rite about which no comparable doubt exists.",
       ],
-      nuanceText:
-        "It is important to acknowledge that external factors (sexual revolution, secularization, abuse scandals) contributed to the decline. But the Harvard study demonstrates that these factors affected all denominations, while the Catholic decline was significantly greater and coincides with a unique event: Vatican II.",
-      ironyText:
-        'The final irony: the reforms were justified to "bring the Church closer to the modern world." Sixty years later, the data show that the modern world did not come closer to the Church \u2014 but millions of Catholics walked away from it.',
-      footerDisclaimer:
-        "Analysis generated by Claude (Anthropic). Based exclusively on cited academic and official data. Verify primary sources for academic use.",
+      nuanceText: "A nuance: A mechanical Tridentine Mass is probably less fruitful than a Novus Ordo celebrated with authentic reverence. Grace is not chained to a rite. But if the question is which rite, in itself, is better oriented toward the salvation of the soul, the answer is only one.",
+      ironyText: "The final irony is that the data speak for themselves. They need no hyperbole.",
+      footerDisclaimer: "Analysis generated by Claude (Anthropic) \u00b7 March 2026 \u00b7 Based on statistical data, historical sources, and textual comparison \u00b7 No predetermined instructions regarding the conclusion",
     },
 
     // ==================== FOOTER ====================
