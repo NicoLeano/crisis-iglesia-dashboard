@@ -113,7 +113,6 @@ export default function App(){
       <p style={{color:textMuted,fontSize:11,fontWeight:500,letterSpacing:"0.15em",textTransform:"uppercase",marginBottom:14,fontFamily:fontM}}>{t.header.subtitle}</p>
       <h1 style={{fontFamily:fontH,fontSize:"clamp(28px, 5vw, 42px)",fontWeight:700,color:"#F0EBE0",lineHeight:1.15,marginBottom:12,letterSpacing:"-0.02em",maxWidth:700,margin:"0 auto 12px"}}>{t.header.title}</h1>
       <p style={{color:gold,fontSize:13,letterSpacing:"0.15em",fontFamily:fontM,opacity:0.6}}>{t.header.dateRange}</p>
-      <p style={{color:"rgba(240,235,224,0.35)",fontSize:12,marginTop:10,fontFamily:fontM,maxWidth:500,margin:"10px auto 0",lineHeight:1.5}}>{t.header.sources}</p>
       <button onClick={()=>setLang(lang==="es"?"en":"es")} style={{
         background:"transparent",border:`1px solid rgba(184,134,11,0.3)`,borderRadius:2,
         color:gold,padding:"6px 16px",fontSize:12,fontFamily:fontM,
