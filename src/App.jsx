@@ -158,7 +158,7 @@ export default function App(){
           {t.overview.statsRow2.map(([v,l,s,p],i)=><Stat key={i} value={v} label={l} sub={s} period={p} color={i===3?olive:crimson}/>)}
         </div>
         <div className="stat-grid-3" style={grid(3)}>
-          {t.overview.statsRow3.map(([v,l,s],i)=><Stat key={i} value={v} label={l} sub={s} color={i===0?crimson:textDim}/>)}
+          {t.overview.statsRow3.map(([v,l,s],i)=><Stat key={i} value={v} label={l} sub={s} color={crimson}/>)}
         </div>
 
         {/* Harvard callout */}
