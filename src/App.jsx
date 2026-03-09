@@ -16,30 +16,30 @@ const sspxDetail=[{y:"1988",p:202,s:213,b:13,pr:60,ch:300},{y:"2008",p:491,s:215
 const tradComp=[{n:"FSSPX",p:733,s:200,m:800,c:62},{n:"FSSP",p:387,s:162,m:251,c:40},{n:"ICKSP",p:80,s:40,m:90,c:12}];
 
 /* ═══════════════════ PALETTE ═══════════════════ */
-const parchment = "#E8DCC8";
-const parchmentDark = "#D4C4A8";
-const ultramarine = "#1E3A5F";
-const goldLeaf = "#B8963E";
-const goldLight = "#D4B44E";
-const crimson = "#9B2335";
-const crimsonLight = "#B83A4B";
-const olive = "#4A5C3A";
-const sepia = "#6B5344";
-const ink = "#2A2118";
-const sepiaLight = "#8B7B6B";
-const borderC = "#C4B49E";
+const parchment = "#F0E6D2";
+const parchmentDark = "#E2D5BE";
+const ultramarine = "#162C50";
+const goldLeaf = "#C6930A";
+const goldLight = "#DAA520";
+const crimson = "#8B0000";
+const crimsonLight = "#A52A2A";
+const olive = "#2E5A1C";
+const sepia = "#4A3728";
+const ink = "#1A120B";
+const sepiaLight = "#6B5B4B";
+const borderC = "#B8A88A";
 
 const sty = {
-  page: { minHeight:"100vh", background:parchment, color:ink, fontFamily:"'Cormorant Garamond','Georgia',serif" },
-  card: { background:parchmentDark, border:`1px solid ${borderC}`, borderRadius:2, padding:"24px 28px", marginBottom:0 },
+  page: { minHeight:"100vh", background:parchment, color:ink, fontFamily:"'Cormorant Garamond','Georgia',serif", fontWeight:500 },
+  card: { background:parchmentDark, border:`1px solid ${borderC}`, borderRadius:3, padding:"24px 28px", marginBottom:0 },
   alert: (c) => ({
-    background: c==="crimson"?"rgba(155,35,53,0.06)":c==="gold"?"rgba(184,150,62,0.08)":c==="green"?"rgba(74,92,58,0.08)":c==="blue"?"rgba(30,58,95,0.06)":"rgba(107,83,68,0.06)",
-    border:`1px solid ${c==="crimson"?"rgba(155,35,53,0.25)":c==="gold"?"rgba(184,150,62,0.3)":c==="green"?"rgba(74,92,58,0.25)":c==="blue"?"rgba(30,58,95,0.2)":"rgba(107,83,68,0.2)"}`,
-    borderRadius:2, padding:"20px 24px"
+    background: c==="crimson"?"rgba(139,0,0,0.07)":c==="gold"?"rgba(198,147,10,0.09)":c==="green"?"rgba(46,90,28,0.08)":c==="blue"?"rgba(22,44,80,0.07)":"rgba(74,55,40,0.07)",
+    border:`1px solid ${c==="crimson"?"rgba(139,0,0,0.35)":c==="gold"?"rgba(198,147,10,0.35)":c==="green"?"rgba(46,90,28,0.3)":c==="blue"?"rgba(22,44,80,0.25)":"rgba(74,55,40,0.25)"}`,
+    borderRadius:3, padding:"20px 24px"
   }),
-  h2: { fontFamily:"'Cinzel',serif", fontWeight:700, fontSize:22, letterSpacing:"0.04em", marginBottom:10, color:ultramarine },
-  sub: { color:sepia, fontSize:14, marginBottom:16, fontStyle:"italic" },
-  ornament: { textAlign:"center", color:goldLeaf, fontSize:14, letterSpacing:"0.3em", margin:"8px 0 12px", opacity:0.6 },
+  h2: { fontFamily:"'Cinzel',serif", fontWeight:900, fontSize:24, letterSpacing:"0.03em", marginBottom:10, color:ultramarine },
+  sub: { color:sepia, fontSize:15, marginBottom:16, fontStyle:"italic", fontWeight:500 },
+  ornament: { textAlign:"center", color:goldLeaf, fontSize:14, letterSpacing:"0.3em", margin:"8px 0 12px", opacity:0.7 },
 };
 
 /* ═══════════════════ COMPONENTS ═══════════════════ */
@@ -52,11 +52,11 @@ const TT = ({active,payload,label}) => {
 };
 
 const Stat = ({value,label,sub,period,color=crimson}) => (
-  <div style={{background:parchmentDark,border:`1px solid ${borderC}`,borderRadius:2,padding:"16px 12px",textAlign:"center"}}>
-    <p style={{fontSize:28,fontWeight:700,color,fontFamily:"'Cinzel',serif",lineHeight:1}}>{value}</p>
-    <p style={{color:ink,fontWeight:600,fontSize:12,marginTop:8,fontFamily:"'Cormorant Garamond',serif"}}>{label}</p>
-    {sub&&<p style={{color:sepia,fontSize:11,marginTop:3}}>{sub}</p>}
-    {period&&<p style={{color:sepiaLight,fontSize:10}}>{period}</p>}
+  <div style={{background:parchmentDark,border:`1px solid ${borderC}`,borderRadius:3,padding:"18px 12px",textAlign:"center"}}>
+    <p style={{fontSize:30,fontWeight:900,color,fontFamily:"'Cinzel',serif",lineHeight:1}}>{value}</p>
+    <p style={{color:ink,fontWeight:700,fontSize:13,marginTop:8,fontFamily:"'Cormorant Garamond',serif"}}>{label}</p>
+    {sub&&<p style={{color:sepia,fontSize:12,marginTop:3,fontWeight:500}}>{sub}</p>}
+    {period&&<p style={{color:sepiaLight,fontSize:11}}>{period}</p>}
   </div>
 );
 
@@ -81,91 +81,48 @@ const Filigree = () => (
 export default function App(){
   const [sec,setSec]=useState("overview");
   const [lang, setLang] = useState("es");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const t = i18n[lang];
   const grid=(cols,gap=12)=>({display:"grid",gridTemplateColumns:`repeat(${cols},1fr)`,gap});
-  const roman = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI"];
 
   return(
   <div style={sty.page}>
-    {/* MOBILE SIDEBAR OVERLAY */}
-    {sidebarOpen && <div className="sidebar-overlay" onClick={()=>setSidebarOpen(false)} />}
-
-    {/* SIDEBAR */}
-    <nav className={`sidebar ${sidebarOpen ? "sidebar-open" : ""}`} style={{
-      position:"fixed",left:0,top:0,width:220,height:"100vh",
-      background:parchmentDark,borderRight:`1px solid ${borderC}`,
-      zIndex:40,overflowY:"auto",padding:"32px 0",
-      fontFamily:"'Cinzel',serif",
-      transition:"transform 0.3s ease",
-    }}>
-      <div style={{padding:"0 20px 24px",borderBottom:`1px solid ${borderC}`,marginBottom:16,textAlign:"center"}}>
-        <p style={{color:goldLeaf,fontSize:16,letterSpacing:"0.3em",marginBottom:8}}>☩</p>
-        <p style={{color:ink,fontSize:11,fontWeight:700,letterSpacing:"0.15em",textTransform:"uppercase"}}>{lang==="es"?"ÍNDICE":"INDEX"}</p>
-      </div>
-      {t.nav.map((s,i)=>(
-        <button key={s.id} onClick={()=>{setSec(s.id);setSidebarOpen(false);}} style={{
-          display:"block",width:"100%",textAlign:"left",padding:"10px 20px",
-          border:"none",cursor:"pointer",transition:"all 0.2s",
-          borderLeft:sec===s.id?`3px solid ${goldLeaf}`:"3px solid transparent",
-          background:sec===s.id?"rgba(184,150,62,0.1)":"transparent",
-          color:sec===s.id?goldLeaf:sepia,
-          fontFamily:"'Cormorant Garamond',serif",fontSize:13,fontWeight:sec===s.id?700:400,
-        }}>
-          <span style={{fontFamily:"'Cinzel',serif",fontSize:10,marginRight:8,color:sec===s.id?goldLeaf:sepiaLight}}>{roman[i]}</span>
-          {s.label}
-        </button>
-      ))}
-      <div style={{padding:"20px",marginTop:24,borderTop:`1px solid ${borderC}`}}>
-        <button onClick={()=>setLang(lang==="es"?"en":"es")} style={{
-          background:"transparent",border:`1px solid ${borderC}`,borderRadius:2,
-          color:sepia,padding:"6px 14px",fontSize:11,fontFamily:"'Cinzel',serif",
-          cursor:"pointer",letterSpacing:"0.1em",width:"100%",
-        }}>
-          {lang==="es"?"English":"Español"}
-        </button>
-      </div>
-    </nav>
-
-    {/* MOBILE HEADER */}
-    <div className="mobile-header" style={{
-      display:"none",
-      position:"fixed",top:0,left:0,right:0,zIndex:30,
-      background:parchmentDark,borderBottom:`1px solid ${borderC}`,
-      padding:"10px 16px",alignItems:"center",justifyContent:"space-between",
-    }}>
-      <button onClick={()=>setSidebarOpen(!sidebarOpen)} style={{
-        background:"transparent",border:"none",cursor:"pointer",
-        color:ink,fontSize:18,fontFamily:"'Cinzel',serif",padding:"4px 8px",
-      }}>☩</button>
-      <span style={{fontFamily:"'Cinzel',serif",fontSize:12,color:ink,fontWeight:700,letterSpacing:"0.08em"}}>
-        {t.header.title.split(" ").slice(0,4).join(" ")}...
-      </span>
+    {/* HEADER */}
+    <div style={{borderBottom:`2px solid ${goldLeaf}`,padding:"44px 20px 36px",textAlign:"center",background:`linear-gradient(180deg,${ultramarine} 0%,#0D1B2A 100%)`}}>
+      <p style={{color:goldLeaf,fontSize:11,fontWeight:700,letterSpacing:"0.35em",textTransform:"uppercase",marginBottom:10}}>{t.header.subtitle}</p>
+      <p style={{color:goldLeaf,fontSize:16,letterSpacing:"0.4em",marginBottom:8}}>☩</p>
+      <h1 style={{fontFamily:"'Cinzel',serif",fontSize:34,fontWeight:900,color:"#F0E6D2",lineHeight:1.2,marginBottom:8}}>{t.header.title}</h1>
+      <p style={{color:goldLeaf,fontSize:13,letterSpacing:"0.2em",opacity:0.8}}>{t.header.dateRange}</p>
+      <p style={{color:"rgba(240,230,210,0.5)",fontSize:12,marginTop:6}}>{t.header.sources}</p>
       <button onClick={()=>setLang(lang==="es"?"en":"es")} style={{
-        background:"transparent",border:`1px solid ${borderC}`,borderRadius:2,
-        color:sepia,padding:"3px 8px",fontSize:10,fontFamily:"'Cinzel',serif",cursor:"pointer",
+        background:"rgba(198,147,10,0.2)", border:`1px solid ${goldLeaf}60`, borderRadius:3,
+        color:goldLight, padding:"5px 14px", fontSize:12, fontFamily:"'Cinzel',serif",
+        cursor:"pointer", letterSpacing:"0.1em", marginTop:10, fontWeight:600
       }}>
-        {lang==="es"?"EN":"ES"}
+        {lang==="es"?"English":"Español"}
       </button>
     </div>
 
-    {/* CONTENT AREA */}
-    <div className="content-area" style={{marginLeft:220,maxWidth:720,padding:"40px 32px"}}>
-      <div style={{marginBottom:32,paddingBottom:20,borderBottom:`1px solid ${borderC}`}}>
-        <p style={{fontFamily:"'Cinzel',serif",fontSize:11,color:goldLeaf,letterSpacing:"0.2em",marginBottom:8}}>
-          {lang==="es"?"CAPÍTULO":"CHAPTER"} {roman[t.nav.findIndex(n=>n.id===sec)]}
-        </p>
-        <h1 style={{fontFamily:"'Cinzel',serif",fontSize:28,fontWeight:700,color:ink,lineHeight:1.3}}>
-          {t.nav.find(n=>n.id===sec)?.label}
-        </h1>
+    {/* NAV PILLS */}
+    <div className="nav-scroll" style={{position:"sticky",top:0,zIndex:20,background:ultramarine,borderBottom:`2px solid ${goldLeaf}`}}>
+      <div style={{maxWidth:900,margin:"0 auto",padding:"8px 12px",display:"flex",overflowX:"auto",gap:4,alignItems:"center"}}>
+        {t.nav.map(s=>(
+          <button key={s.id} onClick={()=>setSec(s.id)} style={{
+            padding:"7px 16px",borderRadius:3,fontSize:12,fontWeight:sec===s.id?800:600,fontFamily:"'Cinzel',serif",
+            whiteSpace:"nowrap",cursor:"pointer",transition:"all 0.2s",border:"none",
+            background:sec===s.id?goldLeaf:"transparent",
+            color:sec===s.id?ultramarine:"rgba(240,230,210,0.7)",
+          }}>{s.label}</button>
+        ))}
       </div>
+    </div>
 
+    <div style={{maxWidth:860,margin:"0 auto",padding:"32px 20px"}}>
       <div style={{display:"flex",flexDirection:"column",gap:24}}>
 
       {/* ══════════ OVERVIEW ══════════ */}
       {sec==="overview"&&<>
         <Card><H2>{t.overview.h2}</H2><Filigree/>
-          <p className="drop-cap" style={{color:ink,fontSize:15,lineHeight:1.8}}>{t.overview.paragraph}</p>
+          <p className="drop-cap" style={{color:ink,fontSize:17,lineHeight:1.8,fontWeight:500}}>{t.overview.paragraph}</p>
         </Card>
         <div className="stat-grid" style={grid(4)}>{t.overview.statsRow1.map(([v,l,s,p],i)=><Stat key={i} value={v} label={l} sub={s} period={p}/>)}</div>
         <div className="stat-grid" style={grid(4)}>{t.overview.statsRow2.map(([v,l,s,p,c],i)=><Stat key={i} value={v} label={l} sub={s} period={p} color={i===3?olive:crimson}/>)}</div>
@@ -173,7 +130,7 @@ export default function App(){
 
         <div style={sty.alert("crimson")}>
           <p style={{color:crimsonLight,fontWeight:700,fontSize:13,marginBottom:8}}>{t.overview.nberAlertTitle}</p>
-          <p style={{color:sepia,fontSize:13,lineHeight:1.7}}>{t.overview.nberAlertText}</p>
+          <p style={{color:sepia,fontSize:15,lineHeight:1.8,fontWeight:500}}>{t.overview.nberAlertText}</p>
           <div style={{display:"flex",gap:8,marginTop:12,flexWrap:"wrap"}}>
             <a href="https://www.nber.org/system/files/working_papers/w34060/w34060.pdf" target="_blank" rel="noopener" style={{background:"rgba(155,35,53,0.1)",color:crimson,padding:"4px 12px",borderRadius:20,fontSize:10,textDecoration:"none"}}>PDF (NBER)</a>
             <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5359609" target="_blank" rel="noopener" style={{background:"rgba(155,35,53,0.1)",color:crimson,padding:"4px 12px",borderRadius:20,fontSize:10,textDecoration:"none"}}>SSRN</a>
@@ -260,8 +217,8 @@ export default function App(){
         <div style={sty.alert("crimson")}><p style={{color:crimsonLight,fontWeight:700,fontSize:12,marginBottom:8}}>{t.nuns.declineTitle}</p>
           <div className="stat-grid-6" style={grid(6)}>{t.nuns.intlDecline.map(([c,d],i)=><div key={i} style={{background:"rgba(155,35,53,0.06)",borderRadius:2,padding:8,textAlign:"center"}}><p style={{color:crimsonLight,fontWeight:800}}>{d}</p><p style={{color:sepiaLight,fontSize:10}}>{c}</p></div>)}</div>
         </div>
-        <Card><p style={{color:sepia,fontSize:13,lineHeight:1.7}}><span style={{color:ink,fontWeight:600}}>{t.nuns.worldDataLabel}</span> {t.nuns.worldDataText}</p></Card>
-        <Card><p style={{color:ink,fontWeight:600,marginBottom:6}}>{t.nuns.educationImpactTitle}</p><p style={{color:sepia,fontSize:13,lineHeight:1.7}}>{t.nuns.educationImpactText}</p></Card>
+        <Card><p style={{color:sepia,fontSize:15,lineHeight:1.8,fontWeight:500}}><span style={{color:ink,fontWeight:600}}>{t.nuns.worldDataLabel}</span> {t.nuns.worldDataText}</p></Card>
+        <Card><p style={{color:ink,fontWeight:600,marginBottom:6}}>{t.nuns.educationImpactTitle}</p><p style={{color:sepia,fontSize:15,lineHeight:1.8,fontWeight:500}}>{t.nuns.educationImpactText}</p></Card>
       </>}
 
       {/* ══════════ MASS / FAITH ══════════ */}
@@ -297,7 +254,7 @@ export default function App(){
 
         <div style={sty.alert("crimson")}>
           <p style={{color:crimsonLight,fontWeight:700,fontSize:13,marginBottom:6}}>{t.mass.transAlertTitle}</p>
-          <p style={{color:sepia,fontSize:12,lineHeight:1.7,marginBottom:12}}>{t.mass.transIntro}</p>
+          <p style={{color:sepia,fontSize:14,lineHeight:1.8,fontWeight:500,marginBottom:12}}>{t.mass.transIntro}</p>
           <div style={grid(2)}>
             {t.mass.transStats.map(([v,l],i)=>(
               <div key={i} style={{background:"rgba(155,35,53,0.06)",borderRadius:2,padding:"10px 14px",textAlign:"center"}}>
@@ -315,7 +272,7 @@ export default function App(){
 
         <Card>
           <H2 color={goldLight}>{t.mass.liturgicalTitle}</H2>
-          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.mass.liturgicalText}</p>
+          <p style={{color:sepia,fontSize:14,lineHeight:1.8,fontWeight:500}}>{t.mass.liturgicalText}</p>
         </Card>
       </>}
 
@@ -338,7 +295,7 @@ export default function App(){
           </Chart>
         </Card>
         <Card>
-          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.marriages.feedbackCycle}</p>
+          <p style={{color:sepia,fontSize:14,lineHeight:1.8,fontWeight:500}}>{t.marriages.feedbackCycle}</p>
         </Card>
       </>}
 
@@ -381,17 +338,17 @@ export default function App(){
 
         <div style={sty.alert("crimson")}>
           <p style={{color:crimsonLight,fontWeight:700,fontSize:13,marginBottom:6}}>{t.orders.impactTitle}</p>
-          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.orders.impactText}</p>
+          <p style={{color:sepia,fontSize:14,lineHeight:1.8,fontWeight:500}}>{t.orders.impactText}</p>
         </div>
 
         <Card>
           <H2 color={goldLight}>{t.orders.seminariesTitle}</H2>
-          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.orders.seminariesText}</p>
+          <p style={{color:sepia,fontSize:14,lineHeight:1.8,fontWeight:500}}>{t.orders.seminariesText}</p>
         </Card>
 
         <div style={sty.alert("crimson")}>
           <p style={{color:crimsonLight,fontWeight:700,fontSize:13,marginBottom:6}}>{t.orders.caraAlert}</p>
-          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.orders.caraDetail}</p>
+          <p style={{color:sepia,fontSize:14,lineHeight:1.8,fontWeight:500}}>{t.orders.caraDetail}</p>
         </div>
       </>}
 
@@ -418,17 +375,17 @@ export default function App(){
         <div style={grid(2)}>
           <div style={sty.alert("green")}>
             <p style={{color:olive,fontWeight:700,fontSize:13,marginBottom:6}}>{t.regional.growthTitle}</p>
-            <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.regional.growthText}</p>
+            <p style={{color:sepia,fontSize:14,lineHeight:1.8,fontWeight:500}}>{t.regional.growthText}</p>
           </div>
           <div style={sty.alert("crimson")}>
             <p style={{color:crimsonLight,fontWeight:700,fontSize:13,marginBottom:6}}>{t.regional.deathTitle}</p>
-            <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.regional.deathText}</p>
+            <p style={{color:sepia,fontSize:14,lineHeight:1.8,fontWeight:500}}>{t.regional.deathText}</p>
           </div>
         </div>
 
         <Card>
           <p style={{color:ink,fontWeight:700,fontSize:14,marginBottom:6}}>{t.regional.mexicoTitle}</p>
-          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.regional.mexicoText}</p>
+          <p style={{color:sepia,fontSize:14,lineHeight:1.8,fontWeight:500}}>{t.regional.mexicoText}</p>
         </Card>
       </>}
 
@@ -436,7 +393,7 @@ export default function App(){
       {sec==="sspx"&&<>
         <Card style={{background:`linear-gradient(135deg, rgba(74,92,58,0.08) 0%, ${parchmentDark} 100%)`,border:"1px solid rgba(74,92,58,0.3)"}}>
           <H2 color={olive}>{t.sspx.h2}</H2>
-          <p className="drop-cap" style={{color:sepia,fontSize:13,lineHeight:1.7}}>{t.sspx.intro}</p>
+          <p className="drop-cap" style={{color:sepia,fontSize:15,lineHeight:1.8,fontWeight:500}}>{t.sspx.intro}</p>
         </Card>
 
         <div className="stat-grid" style={grid(4)}>
@@ -525,7 +482,7 @@ export default function App(){
       {sec==="novusordo"&&<>
         <Card style={{background:`linear-gradient(135deg, rgba(30,58,95,0.08) 0%, ${parchmentDark} 100%)`,border:"1px solid rgba(30,58,95,0.2)"}}>
           <H2 color={ultramarine}>{t.novusordo.h2}</H2>
-          <p className="drop-cap" style={{color:sepia,fontSize:13,lineHeight:1.7}}>{t.novusordo.intro}</p>
+          <p className="drop-cap" style={{color:sepia,fontSize:15,lineHeight:1.8,fontWeight:500}}>{t.novusordo.intro}</p>
         </Card>
 
         <Card>
@@ -541,7 +498,7 @@ export default function App(){
                 </div>
                 <div style={{paddingBottom:4}}>
                   <p style={{color:ink,fontWeight:600,fontSize:13}}>{ev}</p>
-                  <p style={{color:sepia,fontSize:11,lineHeight:1.6}}>{det}</p>
+                  <p style={{color:sepia,fontSize:13,lineHeight:1.7,fontWeight:500}}>{det}</p>
                 </div>
               </div>
             ))}
@@ -564,7 +521,7 @@ export default function App(){
             </div>
           </div>
           <div style={{background:parchment,borderRadius:2,padding:12,marginTop:12}}>
-            <p style={{color:sepia,fontSize:11,lineHeight:1.6}}>{t.novusordo.consiliumNote}</p>
+            <p style={{color:sepia,fontSize:13,lineHeight:1.7,fontWeight:500}}>{t.novusordo.consiliumNote}</p>
           </div>
         </Card>
 
@@ -597,7 +554,7 @@ export default function App(){
       {/* ══════════ CONCLUSION ══════════ */}
       {sec==="conclusion"&&<>
         <Card><H2 color={ink}>{t.conclusion.h2}</H2><Filigree/>
-          <div style={{color:sepia,fontSize:13,lineHeight:1.8}}>
+          <div style={{color:sepia,fontSize:15,lineHeight:1.8,fontWeight:500}}>
             <p className="drop-cap" style={{marginBottom:12}}>{t.conclusion.intro1}</p>
             <p style={{marginBottom:12}}>{t.conclusion.intro2}</p>
             <div style={{background:parchment,borderRadius:2,padding:14,margin:"14px 0"}}><p style={{color:ink,fontWeight:600,marginBottom:8}}>{t.conclusion.collapseSummaryTitle}</p>
@@ -622,9 +579,9 @@ export default function App(){
               <p style={{marginBottom:12}}>{t.conclusion.athanasiusText}</p>
               <div style={{...sty.alert("gold"),margin:"14px 0"}}>
                 <p style={{color:goldLight,fontWeight:700,fontSize:13,marginBottom:8}}>{t.conclusion.verdictTitle}</p>
-                <p style={{color:sepia,fontSize:13,lineHeight:1.8}}>{t.conclusion.verdictText1}</p>
-                <p style={{color:sepia,fontSize:13,lineHeight:1.8,marginTop:8}}>{t.conclusion.verdictText2}</p>
-                <p style={{color:sepia,fontSize:13,lineHeight:1.8,marginTop:8}}>{t.conclusion.verdictText3}</p>
+                <p style={{color:sepia,fontSize:15,lineHeight:1.8,fontWeight:500}}>{t.conclusion.verdictText1}</p>
+                <p style={{color:sepia,fontSize:15,lineHeight:1.8,fontWeight:500,marginTop:8}}>{t.conclusion.verdictText2}</p>
+                <p style={{color:sepia,fontSize:15,lineHeight:1.8,fontWeight:500,marginTop:8}}>{t.conclusion.verdictText3}</p>
               </div>
               <p>{t.conclusion.finalText}</p>
             </div>
@@ -637,7 +594,7 @@ export default function App(){
       {sec==="ai"&&<>
         <div style={sty.alert("blue")}>
           <p style={{color:ultramarine,fontWeight:700,fontSize:13,marginBottom:6}}>{t.ai.transparencyTitle}</p>
-          <p className="drop-cap" style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.ai.transparencyText}</p>
+          <p className="drop-cap" style={{color:sepia,fontSize:14,lineHeight:1.8,fontWeight:500}}>{t.ai.transparencyText}</p>
         </div>
 
         <Card>
@@ -646,7 +603,7 @@ export default function App(){
             {t.ai.analysisPoints.map((pt,i)=>(
               <div key={i}>
                 <h3 style={{color:ink,fontWeight:600,fontSize:13,marginBottom:4}}>{pt.title}</h3>
-                <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{pt.text}</p>
+                <p style={{color:sepia,fontSize:14,lineHeight:1.8,fontWeight:500}}>{pt.text}</p>
               </div>
             ))}
           </div>
@@ -666,7 +623,7 @@ export default function App(){
         </div>
 
         <Card>
-          <p style={{color:sepia,fontSize:12,lineHeight:1.7}}>{t.ai.nuanceText}</p>
+          <p style={{color:sepia,fontSize:14,lineHeight:1.8,fontWeight:500}}>{t.ai.nuanceText}</p>
         </Card>
 
         <Card>
@@ -679,12 +636,12 @@ export default function App(){
       </>}
 
       </div>
+    </div>
 
-      {/* FOOTER */}
-      <div style={{borderTop:`1px solid ${borderC}`,padding:"32px 0 16px",textAlign:"center",marginTop:40}}>
-        <p style={{color:goldLeaf,fontSize:14,letterSpacing:"0.3em"}}>☩</p>
-        <p style={{color:sepia,fontSize:11,marginTop:8,fontFamily:"'Cormorant Garamond',serif"}}>{t.footer.text}</p>
-      </div>
+    {/* FOOTER */}
+    <div style={{borderTop:`2px solid ${goldLeaf}`,padding:"32px 16px",textAlign:"center",background:ultramarine}}>
+      <p style={{color:goldLeaf,fontSize:16,letterSpacing:"0.3em"}}>☩</p>
+      <p style={{color:"rgba(240,230,210,0.6)",fontSize:12,marginTop:8,fontFamily:"'Cormorant Garamond',serif",fontWeight:500}}>{t.footer.text}</p>
     </div>
   </div>
   );
