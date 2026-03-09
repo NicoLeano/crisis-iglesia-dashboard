@@ -164,7 +164,7 @@ export default function App(){
 
       {/* ══════════ OVERVIEW ══════════ */}
       {sec==="overview"&&<>
-        <Card><H2>{t.overview.h2}</H2><Orn/>
+        <Card><H2>{t.overview.h2}</H2><Filigree/>
           <p className="drop-cap" style={{color:ink,fontSize:15,lineHeight:1.8}}>{t.overview.paragraph}</p>
         </Card>
         <div className="stat-grid" style={grid(4)}>{t.overview.statsRow1.map(([v,l,s,p],i)=><Stat key={i} value={v} label={l} sub={s} period={p}/>)}</div>
@@ -596,7 +596,7 @@ export default function App(){
 
       {/* ══════════ CONCLUSION ══════════ */}
       {sec==="conclusion"&&<>
-        <Card><H2 color={ink}>{t.conclusion.h2}</H2><Orn/>
+        <Card><H2 color={ink}>{t.conclusion.h2}</H2><Filigree/>
           <div style={{color:sepia,fontSize:13,lineHeight:1.8}}>
             <p className="drop-cap" style={{marginBottom:12}}>{t.conclusion.intro1}</p>
             <p style={{marginBottom:12}}>{t.conclusion.intro2}</p>
