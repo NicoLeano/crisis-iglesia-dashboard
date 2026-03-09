@@ -44,11 +44,28 @@ const TT = ({active,payload,label}) => {
   </div>;
 };
 
+const sourceLinks = {
+  "Pew 2019": "https://www.pewresearch.org/religion/2019/08/05/beliefs-and-practices/",
+  "CARA": "https://cara.georgetown.edu/frequently-requested-church-statistics/",
+};
+const linkifySub = (s) => {
+  if (typeof s !== "string") return s;
+  for (const [key, url] of Object.entries(sourceLinks)) {
+    const idx = s.indexOf(`(${key})`);
+    if (idx !== -1) {
+      const before = s.slice(0, idx);
+      const after = s.slice(idx + key.length + 2);
+      return <>{before}(<a href={url} target="_blank" rel="noopener noreferrer" style={{color:textMuted,borderBottom:`1px solid ${border}`}}>{key}</a>){after}</>;
+    }
+  }
+  return s;
+};
+
 const Stat = ({value,label,sub,period,color=crimson}) => (
   <div style={{borderTop:`2px solid ${gold}`,padding:"20px 16px 16px",textAlign:"left",background:surface}}>
     <p style={{fontSize:clamp(36,48),fontWeight:700,color,fontFamily:fontH,lineHeight:1,letterSpacing:"-0.02em"}}>{value}</p>
     <p style={{color:textDim,fontWeight:600,fontSize:12,marginTop:10,fontFamily:fontH,textTransform:"uppercase",letterSpacing:"0.06em"}}>{label}</p>
-    {sub&&<p style={{color:textMuted,fontSize:12,marginTop:4,fontFamily:fontM}}>{sub}</p>}
+    {sub&&<p style={{color:textMuted,fontSize:12,marginTop:4,fontFamily:fontM}}>{linkifySub(sub)}</p>}
     {period&&<p style={{color:textMuted,fontSize:11,fontFamily:fontM}}>{period}</p>}
   </div>
 );
