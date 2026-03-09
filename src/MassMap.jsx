@@ -234,6 +234,9 @@ export default function MassMap({ t, lang, onBack }) {
           <MapContainer
             center={[30, 0]}
             zoom={2}
+            minZoom={2}
+            maxBounds={[[-85, -180], [85, 180]]}
+            maxBoundsViscosity={1.0}
             style={{ height: "100%", width: "100%" }}
             zoomControl={false}
           >
