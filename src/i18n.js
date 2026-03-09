@@ -460,7 +460,16 @@ export const i18n = {
 
     // ==================== FOOTER ====================
     footer: {
-      text: "An\u00e1lisis Estad\u00edstico, Lit\u00fargico e Hist\u00f3rico \u00b7 Datos del Vaticano, Harvard/NBER, CARA, Gallup, Pew, FSSPX \u00b7 MMXXVI",
+      label: "Análisis Estadístico, Litúrgico e Histórico",
+      year: "MMXXVI",
+      sources: [
+        { name: "Vaticano", url: "https://www.catholic-hierarchy.org/country/xsc2.html" },
+        { name: "Harvard/NBER", url: "https://www.nber.org/papers/w34060" },
+        { name: "CARA", url: "https://cara.georgetown.edu/" },
+        { name: "Gallup", url: "https://news.gallup.com/poll/232226/church-attendance-among-catholics-resumes-downward-slide.aspx" },
+        { name: "Pew", url: "https://www.pewresearch.org/religion/" },
+        { name: "FSSPX", url: "https://fsspx.news/en/news-events/news/society-st-pius-x-statistics-2025" },
+      ],
     },
   },
 
@@ -933,7 +942,16 @@ export const i18n = {
 
     // ==================== FOOTER ====================
     footer: {
-      text: "Statistical, Liturgical & Historical Analysis \u00b7 Vatican, Harvard/NBER, CARA, Gallup, Pew, SSPX Data \u00b7 MMXXVI",
+      label: "Statistical, Liturgical & Historical Analysis",
+      year: "MMXXVI",
+      sources: [
+        { name: "Vatican", url: "https://www.catholic-hierarchy.org/country/xsc2.html" },
+        { name: "Harvard/NBER", url: "https://www.nber.org/papers/w34060" },
+        { name: "CARA", url: "https://cara.georgetown.edu/" },
+        { name: "Gallup", url: "https://news.gallup.com/poll/232226/church-attendance-among-catholics-resumes-downward-slide.aspx" },
+        { name: "Pew", url: "https://www.pewresearch.org/religion/" },
+        { name: "SSPX", url: "https://fsspx.news/en/news-events/news/society-st-pius-x-statistics-2025" },
+      ],
     },
   },
 };

@@ -818,7 +818,19 @@ export default function App(){
     {/* FOOTER */}
     <footer style={{borderTop:`2px solid ${gold}`,padding:"36px 24px",textAlign:"center",background:navy}}>
       <p style={{color:gold,fontSize:14,opacity:0.4}}>☩</p>
-      <p style={{color:"rgba(240,235,224,0.4)",fontSize:12,marginTop:10,fontFamily:fontM,lineHeight:1.5}}>{t.footer.text}</p>
+      <p style={{color:"rgba(240,235,224,0.4)",fontSize:12,marginTop:10,fontFamily:fontM,lineHeight:1.8}}>
+        {t.footer.label} ·{" "}
+        {t.footer.sources.map((s, i) => (
+          <span key={i}>
+            <a href={s.url} target="_blank" rel="noopener noreferrer" style={{color:"rgba(184,134,11,0.5)",textDecoration:"none",borderBottom:"1px solid rgba(184,134,11,0.2)",transition:"color 0.2s"}}
+              onMouseEnter={e => e.target.style.color = "rgba(184,134,11,0.8)"}
+              onMouseLeave={e => e.target.style.color = "rgba(184,134,11,0.5)"}
+            >{s.name}</a>
+            {i < t.footer.sources.length - 1 ? " · " : ""}
+          </span>
+        ))}
+        {" · "}{t.footer.year}
+      </p>
     </footer>
   </div>
   );
