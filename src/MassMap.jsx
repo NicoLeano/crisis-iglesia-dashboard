@@ -232,17 +232,18 @@ export default function MassMap({ t, lang, onBack }) {
         {/* MAP */}
         <div style={{ position: "relative" }}>
           <MapContainer
-            center={[30, 0]}
-            zoom={2}
-            minZoom={2}
-            maxBounds={[[-85, -180], [85, 180]]}
+            center={[25, 10]}
+            zoom={3}
+            minZoom={3}
+            maxBounds={[[-60, -170], [75, 180]]}
             maxBoundsViscosity={1.0}
             style={{ height: "100%", width: "100%" }}
             zoomControl={false}
           >
             <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-              url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
+              url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+              noWrap={true}
             />
             {flyTarget && <FlyTo center={flyTarget} zoom={flyZoom} />}
             {filtered.map((c, i) => (
