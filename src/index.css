@@ -1,30 +1,56 @@
+/* ═══════════════ DESIGN SYSTEM ═══════════════ */
+:root {
+  --bg: #FAFAF5;
+  --surface: #FFFFFF;
+  --surface-dim: #F3EEE6;
+  --text: #1A1612;
+  --text-dim: #6B6156;
+  --text-muted: #9C9488;
+  --crimson: #8B1A1A;
+  --crimson-light: #A52828;
+  --gold: #B8860B;
+  --gold-dim: rgba(184, 134, 11, 0.12);
+  --olive: #2D5016;
+  --navy: #161412;
+  --border: rgba(26, 22, 18, 0.08);
+  --shadow-sm: 0 1px 3px rgba(26,22,18,0.05), 0 1px 2px rgba(26,22,18,0.03);
+  --shadow-md: 0 4px 12px rgba(26,22,18,0.06), 0 2px 4px rgba(26,22,18,0.04);
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
 /* ═══════════════ RESET ═══════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ═══════════════ BODY / PARCHMENT ═══════════════ */
+/* ═══════════════ BODY ═══════════════ */
 body {
-  background-color: #F0E6D2;
-  background-image:
-    radial-gradient(ellipse at 20% 50%, rgba(212,180,168,0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(180,160,140,0.1) 0%, transparent 40%),
-    radial-gradient(ellipse at 50% 80%, rgba(200,180,160,0.08) 0%, transparent 45%);
-  font-family: 'Cormorant Garamond', 'Georgia', serif;
-  color: #1A120B;
-  font-weight: 500;
-  font-size: 16px;
+  background-color: var(--bg);
+  font-family: var(--font-body);
+  color: var(--text);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ═══════════════ SELECTION ═══════════════ */
+::selection {
+  background: var(--gold-dim);
+  color: var(--text);
 }
 
 /* ═══════════════ DROP CAP ═══════════════ */
 .drop-cap::first-letter {
-  font-family: 'Cinzel', serif;
-  font-size: 3.4em;
+  font-family: var(--font-heading);
+  font-size: 3.8em;
   float: left;
-  color: #C6930A;
-  line-height: 0.8;
-  padding-right: 8px;
-  margin-top: 4px;
-  font-weight: 900;
+  color: var(--crimson);
+  line-height: 0.78;
+  padding-right: 10px;
+  margin-top: 6px;
+  font-weight: 700;
 }
 
 /* ═══════════════ NAV SCROLL ═══════════════ */
@@ -37,12 +63,25 @@ body {
 }
 
 /* ═══════════════ STAT GRIDS ═══════════════ */
-.stat-grid { display: grid; gap: 12px; }
-.stat-grid-3 { display: grid; gap: 12px; }
+.stat-grid { display: grid; gap: 2px; }
+.stat-grid-3 { display: grid; gap: 2px; }
 .stat-grid-6 { display: grid; gap: 12px; }
+
+/* ═══════════════ ANIMATIONS ═══════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes countIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
 
 /* ═══════════════ RESPONSIVE ═══════════════ */
 @media (max-width: 768px) {
+  body { font-size: 16px; }
+
   .stat-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
@@ -53,7 +92,7 @@ body {
     grid-template-columns: repeat(3, 1fr) !important;
   }
   .drop-cap::first-letter {
-    font-size: 2.6em !important;
+    font-size: 2.8em !important;
   }
 }
 
@@ -66,5 +105,12 @@ body {
   }
   .stat-grid-6 {
     grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
