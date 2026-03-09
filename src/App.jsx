@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart, Area, Cell, ReferenceLine, Label } from "recharts";
 import { i18n } from "./i18n";
+import MassMap from "./MassMap";
 
 /* ═══════════════════════ DATA ═══════════════════════ */
 const priestsUSA=[{y:"1965",t:59426,a:56455},{y:"1970",t:59192,a:55000},{y:"1975",t:58909,a:52000},{y:"1980",t:58398,a:49000},{y:"1985",t:57317,a:46000},{y:"1990",t:52124,a:42000},{y:"1995",t:49054,a:38000},{y:"2000",t:45699,a:35500},{y:"2005",t:42839,a:32000},{y:"2010",t:39993,a:28000},{y:"2015",t:37578,a:25500},{y:"2018",t:36580,a:25254},{y:"2022",t:35000,a:24110}];
@@ -102,8 +103,11 @@ const gridStyle = { strokeDasharray: "3 8", stroke: border, strokeOpacity: 1 };
 export default function App(){
   const [sec,setSec]=useState("overview");
   const [lang, setLang] = useState("es");
+  const [page, setPage] = useState("dashboard");
   const t = i18n[lang];
   const grid=(cols,gap=2)=>({display:"grid",gridTemplateColumns:`repeat(${cols},1fr)`,gap});
+
+  if (page === "map") return <MassMap t={t} lang={lang} onBack={() => setPage("dashboard")} />;
 
   return(
   <div style={{minHeight:"100vh",background:bg,color:text}}>
@@ -113,14 +117,24 @@ export default function App(){
       <p style={{color:textMuted,fontSize:11,fontWeight:500,letterSpacing:"0.15em",textTransform:"uppercase",marginBottom:14,fontFamily:fontM}}>{t.header.subtitle}</p>
       <h1 style={{fontFamily:fontH,fontSize:"clamp(28px, 5vw, 42px)",fontWeight:700,color:"#F0EBE0",lineHeight:1.15,marginBottom:12,letterSpacing:"-0.02em",maxWidth:700,margin:"0 auto 12px"}}>{t.header.title}</h1>
       <p style={{color:gold,fontSize:13,letterSpacing:"0.15em",fontFamily:fontM,opacity:0.6}}>{t.header.dateRange}</p>
-      <button onClick={()=>setLang(lang==="es"?"en":"es")} style={{
-        background:"transparent",border:`1px solid rgba(184,134,11,0.3)`,borderRadius:2,
-        color:gold,padding:"6px 16px",fontSize:12,fontFamily:fontM,
-        cursor:"pointer",letterSpacing:"0.06em",marginTop:14,fontWeight:500,
-        transition:"all 0.2s"
-      }}>
-        {lang==="es"?"English":"Español"}
-      </button>
+      <div style={{display:"flex",gap:10,justifyContent:"center",marginTop:14,flexWrap:"wrap"}}>
+        <button onClick={()=>setPage("map")} style={{
+          background:"rgba(45,80,22,0.15)",border:`1px solid rgba(45,80,22,0.4)`,borderRadius:2,
+          color:"#8db87a",padding:"6px 16px",fontSize:12,fontFamily:fontM,
+          cursor:"pointer",letterSpacing:"0.04em",fontWeight:500,
+          transition:"all 0.2s"
+        }}>
+          ☩ {t.map.cta}
+        </button>
+        <button onClick={()=>setLang(lang==="es"?"en":"es")} style={{
+          background:"transparent",border:`1px solid rgba(184,134,11,0.3)`,borderRadius:2,
+          color:gold,padding:"6px 16px",fontSize:12,fontFamily:fontM,
+          cursor:"pointer",letterSpacing:"0.06em",fontWeight:500,
+          transition:"all 0.2s"
+        }}>
+          {lang==="es"?"English":"Español"}
+        </button>
+      </div>
     </header>
 
     {/* NAV */}
