@@ -449,6 +449,7 @@ export const i18n = {
       allCountries: "Todos los paises",
       results: "resultados",
       visitWebsite: "Visitar sitio web",
+      nearMe: "Cerca de mi",
     },
 
     // ==================== FOOTER ====================
@@ -915,6 +916,7 @@ export const i18n = {
       allCountries: "All countries",
       results: "results",
       visitWebsite: "Visit website",
+      nearMe: "Near me",
     },
 
     // ==================== FOOTER ====================

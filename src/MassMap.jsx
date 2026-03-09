@@ -1,10 +1,13 @@
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+import "leaflet.markercluster";
 import chapelsRaw from "./data/fsspx-chapels.json";
 
-/* ═══════════════════ PALETTE (matches App) ═══════════════════ */
+/* ═══════════════════ PALETTE ═══════════════════ */
 const bg = "#FAFAF5";
 const surface = "#FFFFFF";
 const surfaceDim = "#F3EEE6";
@@ -20,41 +23,148 @@ const fontH = "'Space Grotesk', system-ui, sans-serif";
 const fontB = "'Source Serif 4', Georgia, serif";
 const fontM = "'JetBrains Mono', monospace";
 
-/* ═══════════════════ CUSTOM MARKER ═══════════════════ */
+/* ═══════════════════ CROSS MARKER SVG ═══════════════════ */
+const crossSvg = (color, size) => {
+  const s = size;
+  const arm = Math.round(s * 0.15);
+  const cx = s / 2;
+  const cy = s / 2;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">
+    <defs><filter id="ds" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.25"/></filter></defs>
+    <path d="M${cx - arm},0 h${arm * 2} v${cy - arm} h${cx - arm} v${arm * 2} h-${cx - arm} v${cy - arm} h-${arm * 2} v-${cy - arm} h-${cx - arm} v-${arm * 2} h${cx - arm} z"
+      fill="${color}" stroke="${surface}" stroke-width="1.5" filter="url(#ds)"/>
+  </svg>`;
+};
+
 const chapelIcon = L.divIcon({
   className: "",
-  html: `<div style="
-    width:12px;height:12px;border-radius:50%;
-    background:${olive};border:2px solid ${surface};
-    box-shadow:0 1px 4px rgba(0,0,0,0.3);
-  "></div>`,
-  iconSize: [12, 12],
-  iconAnchor: [6, 6],
-  popupAnchor: [0, -8],
+  html: crossSvg(olive, 22),
+  iconSize: [22, 22],
+  iconAnchor: [11, 11],
+  popupAnchor: [0, -12],
 });
 
-const chapelIconActive = L.divIcon({
-  className: "",
-  html: `<div style="
-    width:16px;height:16px;border-radius:50%;
-    background:${crimson};border:2px solid ${surface};
-    box-shadow:0 2px 8px rgba(139,26,26,0.4);
-  "></div>`,
-  iconSize: [16, 16],
-  iconAnchor: [8, 8],
-  popupAnchor: [0, -10],
-});
+/* ═══════════════════ CLUSTER LAYER ═══════════════════ */
+function MarkerClusterLayer({ chapels, t }) {
+  const map = useMap();
+  const clusterRef = useRef(null);
 
-/* ═══════════════════ FLY TO COMPONENT ═══════════════════ */
+  useEffect(() => {
+    if (clusterRef.current) {
+      map.removeLayer(clusterRef.current);
+    }
+
+    const cluster = L.markerClusterGroup({
+      maxClusterRadius: 45,
+      spiderfyOnMaxZoom: true,
+      showCoverageOnHover: false,
+      zoomToBoundsOnClick: true,
+      iconCreateFunction: (c) => {
+        const count = c.getChildCount();
+        let size = 36;
+        let fontSize = 12;
+        if (count > 50) { size = 48; fontSize = 14; }
+        else if (count > 20) { size = 42; fontSize = 13; }
+        return L.divIcon({
+          html: `<div style="
+            width:${size}px;height:${size}px;border-radius:50%;
+            background:${navy};border:2px solid ${gold};
+            display:flex;align-items:center;justify-content:center;
+            color:${gold};font-family:${fontM};font-size:${fontSize}px;font-weight:700;
+            box-shadow:0 2px 8px rgba(0,0,0,0.3);
+          ">${count}</div>`,
+          className: "",
+          iconSize: [size, size],
+          iconAnchor: [size / 2, size / 2],
+        });
+      },
+    });
+
+    chapels.forEach((c) => {
+      const marker = L.marker([c.lat, c.lng], { icon: chapelIcon });
+      const popupHtml = `
+        <div style="font-family:${fontB};min-width:200px;max-width:280px">
+          <p style="font-family:${fontH};font-weight:700;font-size:14px;color:${text};margin:0 0 6px">
+            ${c.name}
+          </p>
+          <p style="font-size:13px;color:${textDim};line-height:1.4;margin:0">
+            ${c.address}<br/>
+            ${c.postalCode ? c.postalCode + " " : ""}${c.city}<br/>
+            ${c.country}
+          </p>
+          ${c.phone ? `<p style="font-size:12px;color:${textDim};margin:6px 0 0"><a href="tel:${c.phone}" style="color:${olive};text-decoration:none">${c.phone}</a></p>` : ""}
+          ${c.email ? `<p style="font-size:12px;margin:2px 0 0"><a href="mailto:${c.email}" style="color:${olive};text-decoration:none">${c.email}</a></p>` : ""}
+          ${c.website ? `<p style="font-size:12px;margin:2px 0 0"><a href="${c.website}" target="_blank" rel="noopener" style="color:${olive};text-decoration:none">${t.map.visitWebsite}</a></p>` : ""}
+          ${c.tags && c.tags.length > 0 ? `
+            <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px">
+              ${c.tags.map(tag => `<span style="font-size:10px;font-family:${fontM};color:${olive};padding:2px 6px;background:rgba(45,80,22,0.08);border-radius:2px">${tag}</span>`).join("")}
+            </div>
+          ` : ""}
+        </div>
+      `;
+      marker.bindPopup(popupHtml, { maxWidth: 300 });
+      cluster.addLayer(marker);
+    });
+
+    map.addLayer(cluster);
+    clusterRef.current = cluster;
+
+    return () => {
+      if (clusterRef.current) map.removeLayer(clusterRef.current);
+    };
+  }, [chapels, map, t]);
+
+  return null;
+}
+
+/* ═══════════════════ FLY TO ═══════════════════ */
 function FlyTo({ center, zoom }) {
   const map = useMap();
   useEffect(() => {
-    if (center) map.flyTo(center, zoom || 12, { duration: 1.2 });
+    if (center) map.flyTo(center, zoom || 13, { duration: 1.2 });
   }, [center, zoom]);
   return null;
 }
 
-/* ═══════════════════ COUNTRIES ═══════════════════ */
+/* ═══════════════════ GEOLOCATION BUTTON ═══════════════════ */
+function GeolocateButton({ t }) {
+  const map = useMap();
+  const [locating, setLocating] = useState(false);
+
+  const handleGeolocate = () => {
+    if (!navigator.geolocation) return;
+    setLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        map.flyTo([pos.coords.latitude, pos.coords.longitude], 10, { duration: 1.5 });
+        setLocating(false);
+      },
+      () => setLocating(false),
+      { enableHighAccuracy: false, timeout: 8000 }
+    );
+  };
+
+  return (
+    <button
+      onClick={handleGeolocate}
+      title={t.map.nearMe}
+      style={{
+        position: "absolute", top: 12, right: 12, zIndex: 1000,
+        width: 40, height: 40, borderRadius: "50%",
+        background: navy, border: `2px solid ${gold}`,
+        color: gold, fontSize: 18, cursor: "pointer",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+        opacity: locating ? 0.5 : 1,
+        transition: "opacity 0.2s",
+      }}
+    >
+      ◎
+    </button>
+  );
+}
+
+/* ═══════════════════ DATA ═══════════════════ */
 const chapels = chapelsRaw.filter(c => c.lat && c.lng);
 const countries = [...new Set(chapels.map(c => c.country).filter(Boolean))].sort();
 
@@ -63,8 +173,7 @@ export default function MassMap({ t, lang, onBack }) {
   const [search, setSearch] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
   const [flyTarget, setFlyTarget] = useState(null);
-  const [flyZoom, setFlyZoom] = useState(12);
-  const listRef = useRef(null);
+  const [flyZoom, setFlyZoom] = useState(13);
 
   const filtered = useMemo(() => {
     let result = chapels;
@@ -82,23 +191,21 @@ export default function MassMap({ t, lang, onBack }) {
   }, [search, selectedCountry]);
 
   const countByCountry = useMemo(() => {
-    const map = {};
-    chapels.forEach(c => {
-      if (c.country) map[c.country] = (map[c.country] || 0) + 1;
-    });
-    return map;
+    const m = {};
+    chapels.forEach(c => { if (c.country) m[c.country] = (m[c.country] || 0) + 1; });
+    return m;
   }, []);
 
   const handleLocate = (chapel) => {
     setFlyTarget([chapel.lat, chapel.lng]);
-    setFlyZoom(14);
+    setFlyZoom(15);
   };
 
   return (
     <div style={{ minHeight: "100vh", background: bg, color: text }}>
       {/* HEADER */}
       <header style={{
-        padding: "20px 24px",
+        padding: "16px 24px",
         background: navy,
         borderBottom: `2px solid ${gold}`,
         display: "flex",
@@ -120,7 +227,7 @@ export default function MassMap({ t, lang, onBack }) {
               fontFamily: fontH, fontSize: "clamp(16px, 3vw, 22px)", fontWeight: 700,
               color: "#F0EBE0", lineHeight: 1.2, letterSpacing: "-0.01em",
             }}>
-              {t.map.title}
+              ☩ {t.map.title}
             </h1>
             <p style={{ color: textMuted, fontSize: 11, fontFamily: fontM, marginTop: 2 }}>
               {chapels.length} {t.map.locations} · {countries.length} {t.map.countries}
@@ -133,10 +240,10 @@ export default function MassMap({ t, lang, onBack }) {
       </header>
 
       {/* MAIN LAYOUT */}
-      <div style={{
+      <div className="map-layout" style={{
         display: "grid",
-        gridTemplateColumns: "320px 1fr",
-        height: "calc(100vh - 80px)",
+        gridTemplateColumns: "340px 1fr",
+        height: "calc(100vh - 64px)",
       }}>
         {/* SIDEBAR */}
         <div style={{
@@ -177,8 +284,9 @@ export default function MassMap({ t, lang, onBack }) {
 
           {/* Results count */}
           <div style={{
-            padding: "10px 16px", borderBottom: `1px solid ${border}`,
+            padding: "8px 16px", borderBottom: `1px solid ${border}`,
             background: surfaceDim,
+            display: "flex", justifyContent: "space-between", alignItems: "center",
           }}>
             <p style={{ fontSize: 11, fontFamily: fontM, color: textMuted }}>
               {filtered.length} {t.map.results}
@@ -186,13 +294,13 @@ export default function MassMap({ t, lang, onBack }) {
           </div>
 
           {/* Chapel list */}
-          <div ref={listRef} style={{ flex: 1, overflowY: "auto", overflowX: "hidden" }}>
+          <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden" }}>
             {filtered.map((c, i) => (
               <div
                 key={i}
                 onClick={() => handleLocate(c)}
                 style={{
-                  padding: "14px 16px",
+                  padding: "12px 16px",
                   borderBottom: `1px solid ${border}`,
                   cursor: "pointer",
                   transition: "background 0.15s",
@@ -200,30 +308,37 @@ export default function MassMap({ t, lang, onBack }) {
                 onMouseEnter={e => e.currentTarget.style.background = surfaceDim}
                 onMouseLeave={e => e.currentTarget.style.background = "transparent"}
               >
-                <p style={{
-                  fontSize: 14, fontWeight: 600, color: text, fontFamily: fontH,
-                  lineHeight: 1.3, marginBottom: 4,
-                }}>
-                  {c.name}
-                </p>
-                <p style={{ fontSize: 12, color: textDim, lineHeight: 1.4 }}>
-                  {c.address}{c.postalCode ? `, ${c.postalCode}` : ""} {c.city}
-                </p>
-                <p style={{ fontSize: 11, color: textMuted, fontFamily: fontM, marginTop: 2 }}>
-                  {c.country}
-                </p>
-                {c.tags && c.tags.length > 0 && (
-                  <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginTop: 6 }}>
-                    {c.tags.slice(0, 3).map((tag, ti) => (
-                      <span key={ti} style={{
-                        fontSize: 10, fontFamily: fontM, color: olive, padding: "2px 6px",
-                        background: "rgba(45,80,22,0.08)", borderRadius: 2,
-                      }}>
-                        {tag}
-                      </span>
-                    ))}
+                <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                  <span style={{
+                    color: olive, fontSize: 14, lineHeight: 1, marginTop: 2, flexShrink: 0,
+                  }}>☩</span>
+                  <div style={{ minWidth: 0 }}>
+                    <p style={{
+                      fontSize: 13, fontWeight: 600, color: text, fontFamily: fontH,
+                      lineHeight: 1.3, marginBottom: 3,
+                    }}>
+                      {c.name}
+                    </p>
+                    <p style={{ fontSize: 12, color: textDim, lineHeight: 1.4 }}>
+                      {c.address}{c.postalCode ? `, ${c.postalCode}` : ""} {c.city}
+                    </p>
+                    <p style={{ fontSize: 11, color: textMuted, fontFamily: fontM, marginTop: 2 }}>
+                      {c.country}
+                    </p>
+                    {c.tags && c.tags.length > 0 && (
+                      <div style={{ display: "flex", gap: 3, flexWrap: "wrap", marginTop: 5 }}>
+                        {c.tags.slice(0, 3).map((tag, ti) => (
+                          <span key={ti} style={{
+                            fontSize: 9, fontFamily: fontM, color: olive, padding: "1px 5px",
+                            background: "rgba(45,80,22,0.08)", borderRadius: 2,
+                          }}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
             ))}
           </div>
@@ -235,86 +350,82 @@ export default function MassMap({ t, lang, onBack }) {
             center={[25, 10]}
             zoom={3}
             minZoom={3}
+            maxZoom={18}
             maxBounds={[[-60, -170], [75, 180]]}
             maxBoundsViscosity={1.0}
             style={{ height: "100%", width: "100%" }}
-            zoomControl={false}
+            zoomControl={true}
           >
             <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>'
               url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
               noWrap={true}
             />
             {flyTarget && <FlyTo center={flyTarget} zoom={flyZoom} />}
-            {filtered.map((c, i) => (
-              <Marker key={`${c.lat}-${c.lng}-${i}`} position={[c.lat, c.lng]} icon={chapelIcon}>
-                <Popup>
-                  <div style={{ fontFamily: fontB, minWidth: 200, maxWidth: 280 }}>
-                    <p style={{ fontFamily: fontH, fontWeight: 700, fontSize: 14, color: text, marginBottom: 6 }}>
-                      {c.name}
-                    </p>
-                    <p style={{ fontSize: 13, color: textDim, lineHeight: 1.4 }}>
-                      {c.address}<br />
-                      {c.postalCode && `${c.postalCode} `}{c.city}<br />
-                      {c.country}
-                    </p>
-                    {c.phone && (
-                      <p style={{ fontSize: 12, color: textDim, marginTop: 6 }}>
-                        <a href={`tel:${c.phone}`} style={{ color: olive, textDecoration: "none" }}>{c.phone}</a>
-                      </p>
-                    )}
-                    {c.email && (
-                      <p style={{ fontSize: 12, marginTop: 2 }}>
-                        <a href={`mailto:${c.email}`} style={{ color: olive, textDecoration: "none" }}>{c.email}</a>
-                      </p>
-                    )}
-                    {c.website && (
-                      <p style={{ fontSize: 12, marginTop: 2 }}>
-                        <a href={c.website} target="_blank" rel="noopener" style={{ color: olive, textDecoration: "none" }}>{t.map.visitWebsite}</a>
-                      </p>
-                    )}
-                    {c.tags && c.tags.length > 0 && (
-                      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginTop: 8 }}>
-                        {c.tags.map((tag, ti) => (
-                          <span key={ti} style={{
-                            fontSize: 10, fontFamily: fontM, color: olive, padding: "2px 6px",
-                            background: "rgba(45,80,22,0.08)", borderRadius: 2,
-                          }}>
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </Popup>
-              </Marker>
-            ))}
+            <MarkerClusterLayer chapels={filtered} t={t} />
+            <GeolocateButton t={t} />
           </MapContainer>
         </div>
       </div>
 
-      {/* Mobile: responsive override */}
       <style>{`
         @media (max-width: 768px) {
-          div[style*="grid-template-columns: 320px"] {
+          .map-layout {
             grid-template-columns: 1fr !important;
             height: auto !important;
           }
-          div[style*="grid-template-columns: 320px"] > div:first-child {
-            max-height: 50vh;
+          .map-layout > div:first-child {
+            max-height: 45vh;
             order: 2;
           }
-          div[style*="grid-template-columns: 320px"] > div:last-child {
-            height: 50vh;
+          .map-layout > div:last-child {
+            height: 55vh;
             order: 1;
           }
         }
         .leaflet-popup-content-wrapper {
           border-radius: 2px !important;
-          box-shadow: 0 4px 12px rgba(26,22,18,0.12) !important;
+          box-shadow: 0 4px 16px rgba(26,22,18,0.15) !important;
+          padding: 0 !important;
+        }
+        .leaflet-popup-content {
+          margin: 14px 16px !important;
         }
         .leaflet-popup-tip {
           box-shadow: none !important;
+        }
+        /* Override default cluster styles */
+        .marker-cluster-small,
+        .marker-cluster-medium,
+        .marker-cluster-large {
+          background: transparent !important;
+        }
+        .marker-cluster-small div,
+        .marker-cluster-medium div,
+        .marker-cluster-large div {
+          background: transparent !important;
+        }
+        .leaflet-control-zoom {
+          border: none !important;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+        }
+        .leaflet-control-zoom a {
+          background: ${navy} !important;
+          color: ${gold} !important;
+          border: none !important;
+          width: 36px !important;
+          height: 36px !important;
+          line-height: 36px !important;
+          font-size: 18px !important;
+        }
+        .leaflet-control-zoom a:hover {
+          background: #2a2520 !important;
+        }
+        .leaflet-control-zoom-in {
+          border-radius: 4px 4px 0 0 !important;
+        }
+        .leaflet-control-zoom-out {
+          border-radius: 0 0 4px 4px !important;
         }
       `}</style>
     </div>
