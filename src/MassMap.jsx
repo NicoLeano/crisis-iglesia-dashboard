@@ -23,25 +23,17 @@ const fontH = "'Space Grotesk', system-ui, sans-serif";
 const fontB = "'Source Serif 4', Georgia, serif";
 const fontM = "'JetBrains Mono', monospace";
 
-/* ═══════════════════ CROSS MARKER SVG ═══════════════════ */
-const crossSvg = (color, size) => {
-  const s = size;
-  const arm = Math.round(s * 0.15);
-  const cx = s / 2;
-  const cy = s / 2;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">
-    <defs><filter id="ds" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.25"/></filter></defs>
-    <path d="M${cx - arm},0 h${arm * 2} v${cy - arm} h${cx - arm} v${arm * 2} h-${cx - arm} v${cy - arm} h-${arm * 2} v-${cy - arm} h-${cx - arm} v-${arm * 2} h${cx - arm} z"
-      fill="${color}" stroke="${surface}" stroke-width="1.5" filter="url(#ds)"/>
-  </svg>`;
-};
-
+/* ═══════════════════ DOT MARKER ═══════════════════ */
 const chapelIcon = L.divIcon({
   className: "",
-  html: crossSvg(olive, 22),
-  iconSize: [22, 22],
-  iconAnchor: [11, 11],
-  popupAnchor: [0, -12],
+  html: `<div style="
+    width:10px;height:10px;border-radius:50%;
+    background:${olive};border:2px solid ${surface};
+    box-shadow:0 1px 4px rgba(0,0,0,0.3);
+  "></div>`,
+  iconSize: [10, 10],
+  iconAnchor: [5, 5],
+  popupAnchor: [0, -8],
 });
 
 /* ═══════════════════ CLUSTER LAYER ═══════════════════ */
@@ -384,15 +376,24 @@ export default function MassMap({ t, lang, onBack }) {
           }
         }
         .leaflet-popup-content-wrapper {
-          border-radius: 2px !important;
-          box-shadow: 0 4px 16px rgba(26,22,18,0.15) !important;
+          border-radius: 4px !important;
+          box-shadow: 0 4px 20px rgba(26,22,18,0.18) !important;
           padding: 0 !important;
+          border: 1px solid rgba(26,22,18,0.08) !important;
+          border-top: 3px solid ${gold} !important;
         }
         .leaflet-popup-content {
-          margin: 14px 16px !important;
+          margin: 16px 18px 14px !important;
+          font-size: 14px !important;
+          line-height: 1.5 !important;
         }
-        .leaflet-popup-tip {
-          box-shadow: none !important;
+        .leaflet-popup-close-button {
+          color: ${textMuted} !important;
+          font-size: 20px !important;
+          padding: 6px 8px 0 0 !important;
+        }
+        .leaflet-popup-tip-container {
+          display: none !important;
         }
         /* Override default cluster styles */
         .marker-cluster-small,
