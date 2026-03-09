@@ -173,6 +173,14 @@ export default function App(){
           </div>
         </Callout>
 
+        {/* NBER key metrics */}
+        <div style={grid(2,2)}>
+          <Stat value={t.overview.nberDeclineRate} label={t.overview.nberDeclineRateLabel} sub={t.overview.nberDeclineRateSub} color={crimson}/>
+          <Stat value={t.overview.nberAccumulated} label={t.overview.nberAccumulatedLabel} sub={t.overview.nberAccumulatedSub} color={crimson}/>
+        </div>
+
+        <PullQuote text={t.overview.wildeQuote} cite={t.overview.wildeCite}/>
+
         {/* Education section */}
         <Card>
           <H2 color={text}>{t.overview.educationTitle}</H2>
@@ -348,6 +356,21 @@ export default function App(){
         </Callout>
 
         <PullQuote text={t.mass.barronQuote} cite=""/>
+
+        {/* NBER: Gender and generational gap */}
+        <Card>
+          <H2 color={text}>{t.mass.nberGenderTitle}</H2>
+          <div className="stat-grid-3" style={{...grid(3),gap:1,marginTop:12}}>
+            {t.mass.nberGenderStats.map(([v,l,d],i)=>(
+              <div key={i} style={{background:surfaceDim,padding:"16px 14px",textAlign:"left"}}>
+                <p style={{color:crimsonLight,fontWeight:700,fontSize:20,fontFamily:fontH}}>{v}</p>
+                <p style={{color:text,fontSize:12,fontWeight:600,marginTop:4,fontFamily:fontH}}>{l}</p>
+                <p style={{color:textMuted,fontSize:11,fontFamily:fontM,marginTop:2}}>{d}</p>
+              </div>
+            ))}
+          </div>
+          <p style={{color:textDim,fontSize:14,lineHeight:1.7,marginTop:16,fontStyle:"italic"}}>{t.mass.nberGenderNote}</p>
+        </Card>
 
         <Card>
           <H2 color={gold}>{t.mass.liturgicalTitle}</H2>
@@ -586,6 +609,12 @@ export default function App(){
           </div>
         </Card>
 
+        {/* NBER: Immediate decline */}
+        <Callout color="crimson">
+          <SectionLabel>{t.novusordo.nberTimingTitle}</SectionLabel>
+          <p style={{color:text,fontSize:16,lineHeight:1.7,marginTop:8}}>{t.novusordo.nberTimingText}</p>
+        </Callout>
+
         <Card>
           <H2 color={text}>{t.novusordo.offertoryTitle}</H2>
           <p style={{color:textMuted,fontSize:12,fontFamily:fontM,marginBottom:20}}>{t.novusordo.offertorySubtitle}</p>
@@ -604,6 +633,21 @@ export default function App(){
           <div style={{background:surfaceDim,padding:"16px 20px",marginTop:2}}>
             <p style={{color:text,fontSize:15,lineHeight:1.7}}>{t.novusordo.consiliumNote}</p>
           </div>
+        </Card>
+
+        {/* YouTube video */}
+        <Card>
+          <H2 color={navy}>{t.novusordo.videoTitle}</H2>
+          <div style={{position:"relative",paddingBottom:"56.25%",height:0,overflow:"hidden",marginTop:12,borderRadius:2}}>
+            <iframe
+              src="https://www.youtube.com/embed/kXA-Nsd2VTI"
+              title={t.novusordo.videoTitle}
+              style={{position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"none"}}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+          <p style={{color:textMuted,fontSize:11,fontFamily:fontM,marginTop:8}}>Mass of the Ages · 225K subscribers</p>
         </Card>
 
         <Card>
@@ -685,6 +729,12 @@ export default function App(){
             <p style={{marginBottom:16}}>{t.conclusion.obedienceText}</p>
 
             <PullQuote text={t.conclusion.athanasiusText}/>
+
+            {/* Club good theory */}
+            <Callout color="gold">
+              <SectionLabel>{t.conclusion.clubGoodTitle}</SectionLabel>
+              <p style={{color:text,fontSize:16,lineHeight:1.7,marginTop:8}}>{t.conclusion.clubGoodText}</p>
+            </Callout>
 
             {/* Verdict */}
             <div style={{borderTop:`2px solid ${gold}`,borderBottom:`2px solid ${gold}`,padding:"28px 0",margin:"28px 0"}}>
