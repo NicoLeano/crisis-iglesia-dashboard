@@ -15,49 +15,67 @@ const sspxP=[{y:"1975",p:30},{y:"1980",p:100},{y:"1988",p:202},{y:"1995",p:350},
 const sspxDetail=[{y:"1988",p:202,s:213,b:13,pr:60,ch:300},{y:"2008",p:491,s:215,b:117,pr:159,ch:725},{y:"2013",p:575,s:217,b:103,pr:105,ch:525},{y:"2017",p:612,s:204,b:116,pr:159,ch:760},{y:"2021",p:676,s:190,b:135,pr:159,ch:760},{y:"2025",p:733,s:200,b:140,pr:170,ch:800}];
 const tradComp=[{n:"FSSPX",p:733,s:200,m:800,c:62},{n:"FSSP",p:387,s:162,m:251,c:40},{n:"ICKSP",p:80,s:40,m:90,c:12}];
 
-/* ═══════════════════ STYLES ═══════════════════ */
-const bg = "#0f0e0b";
-const cardBg = "#1a1814";
-const borderC = "#3d3529";
-const gold = "#c9a84c";
-const goldLight = "#e8d48b";
-const cream = "#f0e6d0";
-const wine = "#8b1a1a";
-const wineLight = "#b44040";
-const parchment = "#2a2520";
+/* ═══════════════════ PALETTE ═══════════════════ */
+const parchment = "#E8DCC8";
+const parchmentDark = "#D4C4A8";
+const ultramarine = "#1E3A5F";
+const goldLeaf = "#B8963E";
+const goldLight = "#D4B44E";
+const crimson = "#9B2335";
+const crimsonLight = "#B83A4B";
+const olive = "#4A5C3A";
+const sepia = "#6B5344";
+const ink = "#2A2118";
+const sepiaLight = "#8B7B6B";
+const borderC = "#C4B49E";
 
 const sty = {
-  page: { minHeight:"100vh", background:bg, color:cream, fontFamily:"'Georgia','Times New Roman',serif" },
-  card: { background:cardBg, border:`1px solid ${borderC}`, borderRadius:8, padding:"20px 24px", marginBottom:0 },
-  alert: (c) => ({ background: c==="wine"?"rgba(139,26,26,0.15)":c==="gold"?"rgba(201,168,76,0.1)":c==="green"?"rgba(34,120,60,0.12)":c==="blue"?"rgba(60,90,140,0.12)":"rgba(100,70,40,0.12)", border:`1px solid ${c==="wine"?"#5c1a1a":c==="gold"?"#6b5a2a":c==="green"?"#2a5c30":c==="blue"?"#2a3a5c":"#4a3a25"}`, borderRadius:8, padding:"20px 24px" }),
-  h2: { fontFamily:"'Georgia',serif", fontWeight:700, fontSize:20, letterSpacing:"0.02em", marginBottom:8 },
-  sub: { color:"#a89a80", fontSize:13, marginBottom:16 },
-  ornament: { textAlign:"center", color:gold, fontSize:14, letterSpacing:"0.3em", margin:"4px 0 8px" },
+  page: { minHeight:"100vh", background:parchment, color:ink, fontFamily:"'Cormorant Garamond','Georgia',serif" },
+  card: { background:parchmentDark, border:`1px solid ${borderC}`, borderRadius:2, padding:"24px 28px", marginBottom:0 },
+  alert: (c) => ({
+    background: c==="crimson"?"rgba(155,35,53,0.06)":c==="gold"?"rgba(184,150,62,0.08)":c==="green"?"rgba(74,92,58,0.08)":c==="blue"?"rgba(30,58,95,0.06)":"rgba(107,83,68,0.06)",
+    border:`1px solid ${c==="crimson"?"rgba(155,35,53,0.25)":c==="gold"?"rgba(184,150,62,0.3)":c==="green"?"rgba(74,92,58,0.25)":c==="blue"?"rgba(30,58,95,0.2)":"rgba(107,83,68,0.2)"}`,
+    borderRadius:2, padding:"20px 24px"
+  }),
+  h2: { fontFamily:"'Cinzel',serif", fontWeight:700, fontSize:22, letterSpacing:"0.04em", marginBottom:10, color:ultramarine },
+  sub: { color:sepia, fontSize:14, marginBottom:16, fontStyle:"italic" },
+  ornament: { textAlign:"center", color:goldLeaf, fontSize:14, letterSpacing:"0.3em", margin:"8px 0 12px", opacity:0.6 },
 };
 
 /* ═══════════════════ COMPONENTS ═══════════════════ */
 const TT = ({active,payload,label}) => {
   if(!active||!payload?.length) return null;
-  return <div style={{background:"#1a1814",border:`1px solid ${borderC}`,borderRadius:6,padding:"8px 12px",fontSize:11,color:cream,fontFamily:"Georgia,serif"}}>
-    <p style={{fontWeight:700,marginBottom:3}}>{label}</p>
+  return <div style={{background:parchment,border:`1px solid ${borderC}`,borderRadius:2,padding:"10px 14px",fontSize:12,color:ink,fontFamily:"'Cormorant Garamond',serif",boxShadow:"2px 2px 8px rgba(42,33,24,0.15)"}}>
+    <p style={{fontWeight:700,marginBottom:4,fontFamily:"'Cinzel',serif",fontSize:11}}>{label}</p>
     {payload.map((e,i)=><p key={i} style={{color:e.color}}>{e.name}: {typeof e.value==="number"&&e.value>999?e.value.toLocaleString():e.value}</p>)}
   </div>;
 };
 
-const Stat = ({value,label,sub,period,color=wine}) => (
-  <div style={{...sty.card,textAlign:"center",padding:"14px 10px"}}>
-    <p style={{fontSize:26,fontWeight:900,color,fontFamily:"Georgia,serif",lineHeight:1}}>{value}</p>
-    <p style={{color:cream,fontWeight:600,fontSize:11,marginTop:6}}>{label}</p>
-    {sub&&<p style={{color:"#8a7d68",fontSize:10,marginTop:2}}>{sub}</p>}
-    {period&&<p style={{color:"#6b6052",fontSize:10}}>{period}</p>}
+const Stat = ({value,label,sub,period,color=crimson}) => (
+  <div style={{background:parchmentDark,border:`1px solid ${borderC}`,borderRadius:2,padding:"16px 12px",textAlign:"center"}}>
+    <p style={{fontSize:28,fontWeight:700,color,fontFamily:"'Cinzel',serif",lineHeight:1}}>{value}</p>
+    <p style={{color:ink,fontWeight:600,fontSize:12,marginTop:8,fontFamily:"'Cormorant Garamond',serif"}}>{label}</p>
+    {sub&&<p style={{color:sepia,fontSize:11,marginTop:3}}>{sub}</p>}
+    {period&&<p style={{color:sepiaLight,fontSize:10}}>{period}</p>}
   </div>
 );
 
 const Card = ({children,style:s}) => <div style={{...sty.card,...s}}>{children}</div>;
-const H2 = ({children,color=gold}) => <h2 style={{...sty.h2,color}}>{children}</h2>;
+const H2 = ({children,color=ultramarine}) => <h2 style={{...sty.h2,color}}>{children}</h2>;
 const Sub = ({children}) => <p style={sty.sub}>{children}</p>;
-const Orn = () => <p style={sty.ornament}>✦ ✦ ✦</p>;
-const Chart = ({children,h=320}) => <ResponsiveContainer width="100%" height={h}>{children}</ResponsiveContainer>;
+const Orn = () => <div style={{textAlign:"center",margin:"12px 0",opacity:0.4}}><svg width="200" height="16" viewBox="0 0 200 16" style={{display:"inline-block"}}><line x1="0" y1="8" x2="85" y2="8" stroke={goldLeaf} strokeWidth="0.5"/><text x="100" y="12" textAnchor="middle" fill={goldLeaf} fontSize="12" fontFamily="Cinzel">&#10022;</text><line x1="115" y1="8" x2="200" y2="8" stroke={goldLeaf} strokeWidth="0.5"/></svg></div>;
+const Chart = ({children,h=320}) => <div style={{border:`1px solid ${borderC}`,padding:3,borderRadius:1,background:parchment}}><div style={{border:`0.5px solid ${borderC}`,padding:"12px 8px 4px",background:"rgba(232,220,200,0.3)"}}><ResponsiveContainer width="100%" height={h}>{children}</ResponsiveContainer></div></div>;
+const Filigree = () => (
+  <div style={{textAlign:"center",margin:"20px 0",opacity:0.35}}>
+    <svg width="280" height="20" viewBox="0 0 280 20" style={{display:"inline-block"}}>
+      <line x1="0" y1="10" x2="120" y2="10" stroke={goldLeaf} strokeWidth="0.5"/>
+      <circle cx="130" cy="10" r="1.5" fill={goldLeaf}/>
+      <text x="140" y="14" textAnchor="middle" fill={goldLeaf} fontSize="14" fontFamily="Cinzel">&#10022;</text>
+      <circle cx="150" cy="10" r="1.5" fill={goldLeaf}/>
+      <line x1="160" y1="10" x2="280" y2="10" stroke={goldLeaf} strokeWidth="0.5"/>
+    </svg>
+  </div>
+);
 
 /* ═══════════════════════ APP ═══════════════════════ */
 export default function App(){
